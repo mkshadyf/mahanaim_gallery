@@ -1,0 +1,255 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Gallerie Mahanaim",
+  "@appTitle": {
+    "description": "Le titre de l'application"
+  },
+  "welcomeMessage": "Bienvenue dans l'application Gallery Mall !",
+  "loginTitle": "Connexion",
+  "@loginTitle": {
+    "description": "Titre de l'écran de connexion"
+  },
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "Étiquette pour le champ de saisie de l'email"
+  },
+  "passwordLabel": "Mot de passe",
+  "@passwordLabel": {
+    "description": "Étiquette pour le champ de saisie du mot de passe"
+  },
+  "loginButton": "Se connecter",
+  "@loginButton": {
+    "description": "Texte pour le bouton de connexion"
+  },
+  "emailValidationError": "Veuillez entrer une adresse email valide",
+  "@emailValidationError": {
+    "description": "Message d'erreur pour une saisie d'email invalide"
+  },
+  "passwordValidationError": "Veuillez entrer un mot de passe",
+  "@passwordValidationError": {
+    "description": "Message d'erreur pour un mot de passe vide"
+  },
+  "tenantPhoneValidationError": "Veuillez entrer un numéro de téléphone valide",
+  "@tenantPhoneValidationError": {
+    "description": "Message d'erreur pour un numéro de téléphone invalide"
+  },
+  "dashboardTitle": "Tableau de Bord",
+  "@dashboardTitle": {
+    "description": "Titre de l'écran du Tableau de Bord"
+  },
+  "shopsTitle": "Magasins",
+  "@shopsTitle": {
+    "description": "Titre de l'écran de liste des magasins"
+  },
+  "addShopTooltip": "Ajouter un nouveau magasin",
+  "@addShopTooltip": {
+    "description": "Info-bulle pour le bouton d'ajout de magasin"
+  },
+  "shopDetailsTitle": "Détails du magasin",
+  "@shopDetailsTitle": {
+    "description": "Titre de l'écran des détails du magasin"
+  },
+  "tenantName": "Nom du locataire",
+  "@tenantName": {
+    "description": "Étiquette pour le nom du locataire"
+  },
+  "tenantPhoneLabel": "Numéro de téléphone",
+  "@tenantPhoneLabel": {
+    "description": "Étiquette pour le champ de saisie du numéro de téléphone"
+  },
+  "tenantsTitle": "Locataires",
+  "@tenantsTitle": {
+    "description": "Titre de l'écran de liste des locataires"
+  },
+  "addTenantTooltip": "Ajouter un nouveau locataire",
+  "@addTenantTooltip": {
+    "description": "Info-bulle pour le bouton d'ajout de locataire"
+  },
+  "addTenantButton": "Ajouter un locataire",
+  "@addTenantButton": {
+    "description": "Texte pour le bouton d'ajout de locataire"
+  },
+  "tenantDetailsTitle": "Détails du locataire",
+  "@tenantDetailsTitle": {
+    "description": "Titre de l'écran des détails du locataire"
+  },
+  "contactInfo": "Informations de contact",
+  "@contactInfo": {
+    "description": "Étiquette pour les informations de contact"
+  },
+  "settingsTitle": "Paramètres",
+  "@settingsTitle": {
+    "description": "Titre de l'écran des paramètres"
+  },
+  "themeSettingsTitle": "Paramètres du thème",
+  "@themeSettingsTitle": {
+    "description": "Titre de la section des paramètres du thème"
+  },
+  "languageSettingsTitle": "Paramètres de langue",
+  "@languageSettingsTitle": {
+    "description": "Titre de la section des paramètres de langue"
+  },
+  "systemTheme": "Thème du système",
+  "@systemTheme": {
+    "description": "Étiquette pour l'option de thème système"
+  },
+  "lightTheme": "Thème clair",
+  "@lightTheme": {
+    "description": "Étiquette pour l'option de thème clair"
+  },
+  "darkTheme": "Thème sombre",
+  "@darkTheme": {
+    "description": "Étiquette pour l'option de thème sombre"
+  },
+  "englishLanguage": "Anglais",
+  "@englishLanguage": {
+    "description": "Étiquette pour l'option de langue anglaise"
+  },
+  "frenchLanguage": "Français",
+  "@frenchLanguage": {
+    "description": "Étiquette pour l'option de langue française"
+  },
+  "tenantNameLabel": "Nom du locataire",
+  "@tenantNameLabel": {
+    "description": "Étiquette pour le champ de saisie du nom du locataire"
+  },
+  "tenantNameValidationError": "Veuillez entrer un nom de locataire valide",
+  "@tenantNameValidationError": {
+    "description": "Message d'erreur pour un nom de locataire invalide"
+  },
+  "tenantEmailLabel": "Email du locataire",
+  "@tenantEmailLabel": {
+    "description": "Étiquette pour le champ de saisie de l'email du locataire"
+  },
+  "tenantEmailValidationError": "Veuillez entrer une adresse email valide pour le locataire",
+  "@tenantEmailValidationError": {
+    "description": "Message d'erreur pour une saisie d'email de locataire invalide"
+  },
+
+  "addTenantTitle": "Ajouter un locataire",
+  "@addTenantTitle": {
+    "description": "Titre de l'écran d'ajout d'un locataire"
+  },
+  "addShopTitle": "Ajouter un Shop",
+  "@addShopTitle": {
+    "description": "Titre de l'écran d'ajout d'un shop"
+  },
+  "addShopButton": "Ajouter Shop",
+  "@addShopButton": {
+    "description": "Text pour le boutton d'ajout d'un shop"
+  },
+  
+    "shopNameLabel": "Nom du shop",
+    "@shopNameLabel": {
+      "description": "Étiquette pour le champ de saisie du nom du shop"
+    },
+    "shopNameValidationError": "Veuillez entrer un nom de shop valide",
+    "@shopNameValidationError": {
+      "description": "Message d'erreur pour un nom de shop invalide"
+    },
+    "shopDescriptionLabel": "Description du shop",
+    "@shopDescriptionLabel": {
+      "description": "Étiquette pour le champ de saisie de la description du shop"
+    },
+    "shopDescriptionValidationError": "Veuillez entrer une description de shop valide",
+    "@shopDescriptionValidationError": {
+      "description": "Message d'erreur pour une description de shop invalide"
+    },
+    "rentAmountLabel": "Montant du loyer",
+      "@rentAmountLabel": {
+        "description": "Étiquette pour le champ de saisie du montant du loyer"
+      },
+      "rentAmountValidationError": "Veuillez entrer un montant de loyer valide",
+      "@rentAmountValidationError": {
+        "description": "Message d'erreur pour un montant de loyer invalide"
+      },
+      "contractLengthLabel": "Durée du contrat",
+      "@contractLengthLabel": {
+        "description": "Étiquette pour le champ de saisie de la durée du contrat"
+      },
+      "contractLengthValidationError": "Veuillez entrer une durée de contrat valide",
+      "@contractLengthValidationError": {
+        "description": "Message d'erreur pour une durée de contrat invalide"
+      },
+      "dateCreatedLabel": "Date de création",
+      "@dateCreatedLabel": {
+        "description": "Étiquette pour le champ de la date de création"
+      },
+      
+        "contractInfo": "Informations du contrat",
+        "@contractInfo": {
+          "description": "Titre de la section des informations du contrat"
+        },
+        "dateCreated": "Date de création",
+        "@dateCreated": {
+          "description": "Étiquette pour la date de création du contrat"
+        },
+        "contractLength": "Durée du contrat",
+        "@contractLength": {
+          "description": "Étiquette pour la durée du contrat"
+        },
+        "rentAmount": "Montant du loyer",
+        "@rentAmount": {
+          "description": "Étiquette pour le montant du loyer"
+        },
+        "paymentsTitle": "Paiements",
+        "@paymentsTitle": {
+          "description": "Titre de la section des paiements"
+        },
+        "analyticsTitle": "Analyses",
+  "@analyticsTitle": {
+    "description": "Titre pour la section analyses"
+  },
+  "totalShops": "Total des Magasins",
+  "@totalShops": {
+    "description": "Étiquette pour le nombre total de magasins"
+  },
+  "totalTenants": "Total des Locataires",
+  "@totalTenants": {
+    "description": "Étiquette pour le nombre total de locataires"
+  },
+  "totalRevenue": "Revenu Total",
+  "@totalRevenue": {
+    "description": "Étiquette pour le revenu total"
+  },
+  "recentNotificationsTitle": "Notifications Récentes",
+  "@recentNotificationsTitle": {
+    "description": "Titre pour la section des notifications récentes"
+  },
+  "viewAllNotificationsButton": "Voir Toutes les Notifications",
+  "@viewAllNotificationsButton": {
+    "description": "Texte du bouton pour voir toutes les notifications"
+  },
+ 
+  "registerTitle": "S'inscrire",
+  "@registerTitle": {
+    "description": "Titre pour la page d'inscription"
+  },
+  "tenantListTitle": "Locataires",
+
+  "contractDetails": "Détails du contrat",
+  "startDate": "Date de début",
+  "endDate": "Date de fin",
+  "monthlyRent": "Loyer mensuel",
+  "leaseFee": "Frais de bail",
+  "paymentHistory": "Historique des paiements",
+  "sendRentReminder": "Envoyer un rappel de loyer",
+  "shopListTitle": "Boutiques",
+
+  "isAvailable": "Est disponible",
+  "yes": "Oui",
+  "no": "Non",
+  "nextAvailableDate": "Prochaine date disponible",
+  "tenants": "Locataires",
+  "addTenant": "Ajouter un locataire",
+  "analytics": "Analyses",
+ 
+  "monthlyRentLabel": "Loyer mensuel",
+  "leaseFeeLabel": "Frais de bail",
+  "contractStartDateLabel": "Date de début du contrat",
+  "contractEndDateLabel": "Date de fin du contrat",
+ "monthlyRentValidationError": "Veuillez entrer le loyer mensuel",
+  "leaseFeeValidationError": "Veuillez entrer les frais de bail"
+    
+  
+}

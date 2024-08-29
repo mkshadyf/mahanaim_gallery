@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "292133117687",
+    "project_id": "mahanaim-gallery-dce24",
+    "storage_bucket": "mahanaim-gallery-dce24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292133117687:android:6f6599b8948e43665a3df2",
+        "android_client_info": {
+          "package_name": "com.shadyinc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292133117687-s0dkn5u1afdqnd3k563d27lv4da4ebd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyyWlDCmKEZgqpYwUdAdgCOSWoA24gsFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292133117687-s0dkn5u1afdqnd3k563d27lv4da4ebd8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292133117687-tnnvak75msjl0id30gbrlhg53tju9la6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadyinc.mahanaimgallery"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292133117687:android:21da469d1e59898d5a3df2",
+        "android_client_info": {
+          "package_name": "com.shadyinc.mahanaimgallery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292133117687-umthmpo0rkkka7euudaaotjmmp90i47m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadyinc.mahanaimgallery",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "292133117687-s0dkn5u1afdqnd3k563d27lv4da4ebd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyyWlDCmKEZgqpYwUdAdgCOSWoA24gsFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292133117687-s0dkn5u1afdqnd3k563d27lv4da4ebd8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292133117687-tnnvak75msjl0id30gbrlhg53tju9la6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadyinc.mahanaimgallery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

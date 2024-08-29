@@ -1,0 +1,264 @@
+{
+  "@@locale": "en",
+  "appTitle": "Mahanaim Gallery",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcomeMessage": "Welcome to the Gallery Mall app!",
+  "loginTitle": "Login",
+  "@loginTitle": {
+    "description": "Title for the login screen"
+  },
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "Label for the email input field"
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for the password input field"
+  },
+  "loginButton": "Login",
+  "@loginButton": {
+    "description": "Text for the login button"
+  },
+  "emailValidationError": "Please enter a valid email address",
+  "@emailValidationError": {
+    "description": "Error message for invalid email input"
+  },
+  "passwordValidationError": "Please enter a password",
+  "@passwordValidationError": {
+    "description": "Error message for empty password input"
+  },
+  "tenantPhoneValidationError": "Please enter a valid phone number",
+  "@tenantPhoneValidationError": {
+    "description": "Error message for invalid phone number input"
+  },
+  "dashboardTitle": "Dashboard",
+  "@dashboardTitle": {
+    "description": "Title for the dashboard screen"
+  },
+  "shopsTitle": "Shops",
+  "@shopsTitle": {
+    "description": "Title for the shops list screen"
+  },
+  "addShopTooltip": "Add new shop",
+  "@addShopTooltip": {
+    "description": "Tooltip for the add shop button"
+  },
+  "shopDetailsTitle": "Shop Details",
+  "@shopDetailsTitle": {
+    "description": "Title for the shop details screen"
+  },
+  "tenantName": "Tenant Name",
+  "@tenantName": {
+    "description": "Label for the tenant name"
+  },
+  "tenantPhoneLabel": "Phone Number",
+  "@tenantPhoneLabel": {
+    "description": "Label for the phone number input"
+  },
+  "tenantsTitle": "Tenants",
+  "@tenantsTitle": {
+    "description": "Title for the tenants list screen"
+  },
+  "addTenantTooltip": "Add new tenant",
+  "@addTenantTooltip": {
+    "description": "Tooltip for the add tenant button"
+  },
+  "addTenantButton": "Add Tenant",
+  "@addTenantButton": {
+    "description": "Text for the add tenant button"
+  },
+  "tenantDetailsTitle": "Tenant Details",
+  "@tenantDetailsTitle": {
+    "description": "Title for the tenant details screen"
+  },
+  "contactInfo": "Contact Info",
+  "@contactInfo": {
+    "description": "Label for the contact info"
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title for the settings screen"
+  },
+  "themeSettingsTitle": "Theme Settings",
+  "@themeSettingsTitle": {
+    "description": "Title for theme settings section"
+  },
+  "languageSettingsTitle": "Language Settings",
+  "@languageSettingsTitle": {
+    "description": "Title for language settings section"
+  },
+  "systemTheme": "System Theme",
+  "@systemTheme": {
+    "description": "Label for system theme option"
+  },
+  "lightTheme": "Light Theme",
+  "@lightTheme": {
+    "description": "Label for light theme option"
+  },
+  "darkTheme": "Dark Theme",
+  "@darkTheme": {
+    "description": "Label for dark theme option"
+  },
+  "englishLanguage": "English",
+  "@englishLanguage": {
+    "description": "Label for English language option"
+  },
+  "frenchLanguage": "French",
+  "@frenchLanguage": {
+    "description": "Label for French language option"
+  },
+  "tenantNameLabel": "Tenant Name",
+  "@tenantNameLabel": {
+    "description": "Label for the tenant name input field"
+  },
+  "tenantNameValidationError": "Please enter a valid tenant name",
+  "@tenantNameValidationError": {
+    "description": "Error message for invalid tenant name input"
+  },
+  "tenantEmailLabel": "Tenant Email",
+  "@tenantEmailLabel": {
+    "description": "Label for the tenant email input field"
+  },
+  "tenantEmailValidationError": "Please enter a valid email address",
+  "@tenantEmailValidationError": {
+    "description": "Error message for invalid tenant email input"
+  },
+  "addTenantTitle": "Add New Tenant",
+  "@addTenantTitle": {
+    "description": "Title for the add new tenant screen"
+  },
+  "addShopTitle": "Add New Shop",
+  "@addShopTitle": {
+    "description": "Title for the add new shop screen"
+  },
+  "addShopButton": "Add Shop",
+  "@addShopButton": {
+    "description": "Text for the add shop button"
+  },
+  "shopNameLabel": "Shop Name",
+    "@shopNameLabel": {
+      "description": "Label for the shop name input field"
+    },
+    "shopNameValidationError": "Please enter a valid shop name",
+    "@shopNameValidationError": {
+      "description": "Error message for invalid shop name input"
+    },
+    "shopDescriptionLabel": "Shop Description",
+    "@shopDescriptionLabel": {
+      "description": "Label for the shop description input field"
+    },
+    "shopDescriptionValidationError": "Please enter a valid shop description",
+    "@shopDescriptionValidationError": {
+      "description": "Error message for invalid shop description input"
+    },
+"rentAmountLabel": "Rent Amount",
+    "@rentAmountLabel": {
+      "description": "Label for the rent amount input field"
+    },
+    "rentAmountValidationError": "Please enter a valid rent amount",
+    "@rentAmountValidationError": {
+      "description": "Error message for invalid rent amount input"
+    },
+    "contractLengthLabel": "Contract Length",
+    "@contractLengthLabel": {
+      "description": "Label for the contract length input field"
+    },
+    "contractLengthValidationError": "Please enter a valid contract length",
+    "@contractLengthValidationError": {
+      "description": "Error message for invalid contract length input"
+    },
+    "dateCreatedLabel": "Date Created",
+    "@dateCreatedLabel": {
+      "description": "Label for the date created field"
+    },
+
+"contractInfo": "Contract Information",
+    "@contractInfo": {
+      "description": "Label for the contract information section"
+    },
+    "dateCreated": "Date Created",
+    "@dateCreatedField": {
+      "description": "Field displaying the date the contract was created",
+      "placeholders": {
+        "date": {
+          "type": "String",
+          "example": "2023-05-15"
+        }
+      }
+    },
+    "contractLength": "Contract Length(in months)",
+     "@contractLength": {
+      "description": "Field displaying the contract length"
+    },
+    "rentAmount": "Rent Amount",
+    "@rentAmountField": {
+      "description": "Field displaying the rent amount",
+      "placeholders": {
+        "amount": {
+          "type": "double",
+          "format": "decimalPattern",
+          "example": "1000.00"
+        }
+      }
+    },
+    "paymentsTitle": "Payments",
+    "@paymentsTitle": {
+      "description": "Title for the payments section"
+    },
+    "analyticsTitle": "Analytics",
+  "@analyticsTitle": {
+    "description": "Title for the analytics section"
+  },
+  "totalShops": "Total Shops",
+  "@totalShops": {
+    "description": "Label for total number of shops"
+  },
+  "totalTenants": "Total Tenants",
+  "@totalTenants": {
+    "description": "Label for total number of tenants"
+  },
+  "totalRevenue": "Total Revenue",
+  "@totalRevenue": {
+    "description": "Label for total revenue"
+  },
+  "recentNotificationsTitle": "Recent Notifications",
+  "@recentNotificationsTitle": {
+    "description": "Title for the recent notifications section"
+  },
+  "viewAllNotificationsButton": "View All Notifications",
+  "@viewAllNotificationsButton": {
+    "description": "Button text to view all notifications"
+  }
+  ,
+  "registerTitle": "Register",
+  "@registerTitle": {
+    "description": "Title for Registration page"
+  },
+  "tenantListTitle": "Tenants",
+   "contractDetails": "Contract Details",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "monthlyRent": "Monthly Rent",
+  "leaseFee": "Lease Fee",
+  "paymentHistory": "Payment History",
+  "sendRentReminder": "Send Rent Reminder",
+  "shopListTitle": "Shops",
+
+  "isAvailable": "Is Available",
+  "yes": "Yes",
+  "no": "No",
+  "nextAvailableDate": "Next Available Date",
+  "tenants": "Tenants",
+  "addTenant": "Add Tenant",
+  "analytics": "Analytics",
+
+  "monthlyRentLabel": "Monthly Rent",
+  "leaseFeeLabel": "Lease Fee",
+  "contractStartDateLabel": "Contract Start Date",
+  "contractEndDateLabel": "Contract End Date",
+"monthlyRentValidationError": "Please enter the monthly rent",
+  "leaseFeeValidationError": "Please enter the lease fee"
+
+}
