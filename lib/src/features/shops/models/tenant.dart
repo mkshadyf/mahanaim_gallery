@@ -1,3 +1,5 @@
+import '../../notifications/models/notificationsettings.dart';
+
 class Tenant {
   final String id;
   final String name;
@@ -8,6 +10,7 @@ class Tenant {
   final DateTime contractEndDate;
   final double monthlyRent;
   final double leaseFee;
+  NotificationSettings notificationSettings;
 
   Tenant({
     required this.id,
@@ -19,6 +22,7 @@ class Tenant {
     required this.contractEndDate,
     required this.monthlyRent,
     required this.leaseFee,
+    this.notificationSettings = const NotificationSettings(),
   });
 
   factory Tenant.fromMap(Map<String, dynamic> map) {
@@ -53,14 +57,21 @@ class Tenant {
 class Payment {
   final DateTime date;
   final double amount;
+  final double amountDue;
   final String type;
 
-  Payment({required this.date, required this.amount, required this.type});
+  Payment({
+    required this.date,
+    required this.amount,
+    required this.amountDue,
+    required this.type,
+  });
 
   factory Payment.fromMap(Map<String, dynamic> map) {
     return Payment(
       date: DateTime.parse(map['date']),
       amount: map['amount'],
+      amountDue: map['amountDue'],
       type: map['type'],
     );
   }
@@ -69,6 +80,7 @@ class Payment {
     return {
       'date': date.toIso8601String(),
       'amount': amount,
+      'amountDue': amountDue,
       'type': type,
     };
   }

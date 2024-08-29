@@ -31,10 +31,20 @@ class AnalyticsWidget extends StatelessWidget {
                 _buildAnalyticItem(context, localizations.totalRevenue, '\$${shopProvider.totalRevenue.toStringAsFixed(2)}'),
               ],
             ),
+            // In AnalyticsWidget class
+ElevatedButton(
+  onPressed: () {
+    Navigator.pushNamed(context, '/detailed_insights');
+  },
+  child: Text(localizations.viewDetailedInsights),
+),
+
           ],
         ),
       ),
+      
     );
+    
   }
 
   Widget _buildAnalyticItem(BuildContext context, String label, String value) {
@@ -43,8 +53,11 @@ class AnalyticsWidget extends StatelessWidget {
         Text(label, style: Theme.of(context).textTheme.labelSmall),
         const SizedBox(height: 4),
         Text(value, style: Theme.of(context).textTheme.headlineMedium),
+      
       ],
+
     );
+    
   }
 }
 

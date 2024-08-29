@@ -259,6 +259,30 @@
   "contractStartDateLabel": "Contract Start Date",
   "contractEndDateLabel": "Contract End Date",
 "monthlyRentValidationError": "Please enter the monthly rent",
-  "leaseFeeValidationError": "Please enter the lease fee"
-
+  "leaseFeeValidationError": "Please enter the lease fee",
+  "viewDetailedInsights": "View More.."
+,
+    "detailedInsightsTitle": "Detailed Insights",
+    "revenueBreakdown": "Revenue Breakdown",
+    "occupancyRate": "Occupancy Rate",
+    "tenantTurnoverRate": "Tenant Turnover Rate",
+    "paymentPerformance": "Payment Performance",
+    "onTimePaymentRate": "On-time Payment Rate",
+    "latePaymentRate": "Late Payment Rate",
+    "outstandingBalance": "Outstanding Balance",
+    "upcomingLeaseExpirations": "Upcoming Lease Expirations",
+    "expiresOn": "Expires on",
+    "topPerformingShops": "Top Performing Shops",
+    "topPerformingTenants": "Top Performing Tenants",
+    "revenue": "Revenue",
+     "email": "Email",
+    "phoneNumber": "Phone Number",
+   
+    "amountDue": "Amount Due",
+    "notificationSettings": "Notification Settings",
+    "smsNotifications": "SMS Notifications",
+    "emailNotifications": "Email Notifications",
+    "save": "Save"
+  
+  
 }

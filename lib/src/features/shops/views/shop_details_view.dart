@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/shop.dart';
-import '../providers/shop_provider.dart';
-import '../providers/tenant_provider.dart';
+ import '../providers/tenant_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShopDetailsView extends StatelessWidget {
@@ -12,8 +11,7 @@ class ShopDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopProvider = Provider.of<ShopProvider>(context);
-    final tenantProvider = Provider.of<TenantProvider>(context);
+     final tenantProvider = Provider.of<TenantProvider>(context);
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(

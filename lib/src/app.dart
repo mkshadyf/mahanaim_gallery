@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'features/analytics/detailed_insights_view.dart';
 import 'features/dashboard/maindashboard.dart';
 import 'features/shops/models/shop.dart';
 import 'features/shops/models/tenant.dart';
@@ -80,6 +81,8 @@ class MyApp extends StatelessWidget {
             '/add_tenant': (context) => const AddTenantView(),
             '/tenant_list': (context) => const TenantListView(),
             '/login': (context) => const LoginView(),
+              '/detailed_insights': (context) => const DetailedInsightsView(),
+
           },
           onGenerateRoute: (RouteSettings routeSettings) {
             return MaterialPageRoute<void>(

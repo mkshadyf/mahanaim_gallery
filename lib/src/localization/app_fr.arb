@@ -249,7 +249,32 @@
   "contractStartDateLabel": "Date de début du contrat",
   "contractEndDateLabel": "Date de fin du contrat",
  "monthlyRentValidationError": "Veuillez entrer le loyer mensuel",
-  "leaseFeeValidationError": "Veuillez entrer les frais de bail"
-    
+  "leaseFeeValidationError": "Veuillez entrer les frais de bail",
+  "viewDetailedInsights": "Voir Plus..",
+  "detailedInsightsTitle": "Rapports détaillés",
+
+  "revenueBreakdown": "Répartition des revenus",
+  "occupancyRate": "Taux d'occupation",
+  "tenantTurnoverRate": "Taux de rotation des locataires",
+  "paymentPerformance": "Performance des paiements",
+  "onTimePaymentRate": "Taux de paiement à temps",
+  "latePaymentRate": "Taux de paiement en retard",
+  "outstandingBalance": "Solde impayé",
+  "upcomingLeaseExpirations": "Renouvellement des baux à venir",
+  "expiresOn": "Expire le",
+  "topPerformingShops": "Boutiques les plus performantes",
+  "topPerformingTenants": "Locataires les plus performants",
+  "revenue": "Revenue",
+
+  "email": "E-mail",
+  "phoneNumber": "Numéro de téléphone",
+  
+  "amountDue": "Montant dû",
+  "notificationSettings": "Paramètres de notification",
+  "smsNotifications": "Notifications SMS",
+  "emailNotifications": "Notifications par e-mail",
+  "save": "Enregistrer"
+
+
   
 }

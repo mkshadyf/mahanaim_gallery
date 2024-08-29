@@ -1,8 +1,10 @@
                import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../models/tenant.dart';
-import '../providers/tenant_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+ import '../models/tenant.dart';
+ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
+
+
 
 class TenantDetailsView extends StatelessWidget {
   final Tenant tenant;
@@ -11,7 +13,6 @@ class TenantDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tenantProvider = Provider.of<TenantProvider>(context);
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -23,27 +24,16 @@ class TenantDetailsView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(tenant.name, style: Theme.of(context).textTheme.headlineMedium),
-                    const SizedBox(height: 8),
-                    Text(tenant.email),
-                    Text(tenant.phoneNumber),
-                    const SizedBox(height: 16),
-                    Text(localizations.contractDetails, style: Theme.of(context).textTheme.headlineSmall),
-                    Text('${localizations.startDate}: ${tenant.contractStartDate.toString()}'),
-                    Text('${localizations.endDate}: ${tenant.contractEndDate.toString()}'),
-                    Text('${localizations.monthlyRent}: \$${tenant.monthlyRent}'),
-                    Text('${localizations.leaseFee}: \$${tenant.leaseFee}'),
-                  ],
-                ),
-
-              ),
-            ),
+            Text(tenant.name, style: Theme.of(context).textTheme.headlineMedium),
+            const SizedBox(height: 8),
+            Text('${localizations.emailLabel}: ${tenant.email}'),
+            Text('${localizations.contactInfo}: ${tenant.phoneNumber}'),
+            const SizedBox(height: 16),
+            Text(localizations.contractDetails, style: Theme.of(context).textTheme.headlineSmall),
+            Text('${localizations.startDate}: ${tenant.contractStartDate.toString()}'),
+            Text('${localizations.endDate}: ${tenant.contractEndDate.toString()}'),
+            Text('${localizations.monthlyRent}: \$${tenant.monthlyRent}'),
+            Text('${localizations.leaseFee}: \$${tenant.leaseFee}'),
             const SizedBox(height: 16),
             Text(localizations.paymentHistory, style: Theme.of(context).textTheme.headlineSmall),
             ListView.builder(
@@ -53,21 +43,65 @@ class TenantDetailsView extends StatelessWidget {
               itemBuilder: (context, index) {
                 final payment = tenant.payments[index];
                 return ListTile(
-                  title: Text('${payment.type} - \$${payment.amount}'),
-                  subtitle: Text(payment.date.toString()),
+                  title: Text('${payment.date.toString()} - \$${payment.amount}'),
+                  subtitle: Text('${localizations.amountDue}: \$${payment.amountDue}'),
                 );
               },
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                // Implement rent payment reminder functionality
-              },
-              child: Text(localizations.sendRentReminder),
+              onPressed: () => _showNotificationSettingsDialog(context),
+              child: Text(localizations.notificationSettings),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showNotificationSettingsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)!.notificationSettings),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SwitchListTile(
+                title: Text(AppLocalizations.of(context)!.smsNotifications),
+                value: tenant.notificationSettings.sms,
+                onChanged: (bool value) {
+                  // Update tenant's notification settings
+                },
+              ),
+              SwitchListTile(
+                title: Text(AppLocalizations.of(context)!.emailNotifications),
+                value: tenant.notificationSettings.email,
+                onChanged: (bool value) {
+                  // Update tenant's notification settings
+                },
+              ),
+              TextFormField(
+                initialValue: tenant.notificationSettings.phoneNumber,
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.contactInfo),
+                onChanged: (String value) {
+                  // Update tenant's phone number
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text(AppLocalizations.of(context)!.save),
+              onPressed: () {
+                // Save updated notification settings
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
