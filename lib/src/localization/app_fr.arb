@@ -273,7 +273,90 @@
   "notificationSettings": "Paramètres de notification",
   "smsNotifications": "Notifications SMS",
   "emailNotifications": "Notifications par e-mail",
-  "save": "Enregistrer"
+  "save": "Enregistrer",
+  "addRent": "Ajouter un loyer",
+   "cancel": "Annuler",
+"overduePayments": "Paiements en Retard",
+   "searchShops": "Rechercher des Boutiques",
+   "searchTenants": "Rechercher des Locataires",
+   "noShopsFound": "Aucune boutique trouvée",
+   "noTenantsFound": "Aucun locataire trouvé",
+
+   "editTenantButton": "Modifier le Locataire",
+   "assignedShopLabel": "Boutique Assignée",
+   "noAssignedShop": "Aucune boutique assignée",
+   "errorLoadingShop": "Erreur lors du chargement de la boutique",
+   "recentShops": "Boutiques Récentes",
+   "recentTenants": "Locataires Récents",
+   "rentPayments": "Paiements de loyer",
+   "date": "Date",
+   "amount": "Montant",
+   "tenantId": "ID du locataire",
+   "addRentPayment": "Ajouter un paiement de loyer",
+   "@rentPayments": {
+     "description": "Label for rent payments"
+   },
+   "@date": {
+     "description": "Label for date"
+   },
+   "@amount": {
+     "description": "Label for amount"
+   },
+   "@tenantId": {
+     "description": "Label for tenant ID"
+   },
+   "@addRentPayment": {
+     "description": "Button text for adding a rent payment"
+   },
+   "selectShop": "Sélectionner un magasin",
+  "selectTenant": "Sélectionner un locataire",
+ 
+  "selectShopValidation": "Veuillez sélectionner un magasin",
+  "selectTenantValidation": "Veuillez sélectionner un locataire",
+  "amountValidation": "Veuillez entrer un montant",
+  "rentPaymentsTitle": "Paiements de loyer",
+  "rentPaymentsDetailsTitle": "Détails des paiements de loyer",
+  "totalRentPaid": "Loyer total payé",
+ 
+  "@selectShop": {
+    "description": "Label for selecting a shop"
+  },
+  "@selectTenant": {
+    "description": "Label for selecting a tenant"
+  },
+ 
+  "@selectShopValidation": {
+    "description": "Validation message for selecting a shop"
+  },
+  "@selectTenantValidation": {
+    "description": "Validation message for selecting a tenant"
+  },
+  "@amountValidation": {
+    "description": "Validation message for the amount input field"
+  },
+  "@rentPaymentsTitle": {
+    "description": "Title for the rent payments list screen"
+  },
+  "@rentPaymentsDetailsTitle": {
+    "description": "Title for the rent payments details screen"
+  },
+  "@totalRentPaid": {
+    "description": "Label for total rent paid"
+  },
+ 
+ 
+  "@contractDetails": {
+    "description": "Label for contract details"
+  },
+  "@startDate": {
+    "description": "Label for start date"
+  },
+  "@endDate": {
+    "description": "Label for end date"
+  },
+  "@paymentHistory": {
+    "description": "Label for payment history"
+  }
 
 
   

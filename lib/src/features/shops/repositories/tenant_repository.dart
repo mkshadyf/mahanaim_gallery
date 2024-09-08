@@ -5,11 +5,37 @@ class TenantRepository {
   final CollectionReference _tenantsCollection =
       FirebaseFirestore.instance.collection('tenants');
 
-  Future<List<Tenant>> fetchTenants() async {
-    QuerySnapshot querySnapshot = await _tenantsCollection.get();
+  Future<List<Tenant>> fetchTenants({int limit = 20, String? lastTenantId}) async {
+    Query query = _tenantsCollection.orderBy('name').limit(limit);
+
+    if (lastTenantId != null) {
+      DocumentSnapshot lastDoc = await _tenantsCollection.doc(lastTenantId).get();
+      query = query.startAfterDocument(lastDoc);
+    }
+
+    QuerySnapshot querySnapshot = await query.get();
     return querySnapshot.docs
         .map((doc) => Tenant.fromMap(doc.data() as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<List<Tenant>> searchTenants(String query) async {
+    QuerySnapshot querySnapshot = await _tenantsCollection
+        .where('name', isGreaterThanOrEqualTo: query)
+        .where('name', isLessThan: query + 'z')
+        .get();
+
+    return querySnapshot.docs
+        .map((doc) => Tenant.fromMap(doc.data() as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<Tenant?> fetchTenantById(String tenantId) async {
+    DocumentSnapshot doc = await _tenantsCollection.doc(tenantId).get();
+    if (doc.exists) {
+      return Tenant.fromMap(doc.data() as Map<String, dynamic>);
+    }
+    return null;
   }
 
   Future<void> addTenant(Tenant tenant) async {
@@ -24,9 +50,12 @@ class TenantRepository {
     await _tenantsCollection.doc(tenantId).delete();
   }
 
-  Future<void> addPayment(String tenantId, Payment payment) async {
-    await _tenantsCollection.doc(tenantId).update({
-      'payments': FieldValue.arrayUnion([payment.toMap()])
-    });
+  Future<void> batchUpdateTenants(List<Tenant> tenants) async {
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+    for (var tenant in tenants) {
+      DocumentReference docRef = _tenantsCollection.doc(tenant.id);
+      batch.update(docRef, tenant.toMap());
+    }
+    await batch.commit();
   }
 }

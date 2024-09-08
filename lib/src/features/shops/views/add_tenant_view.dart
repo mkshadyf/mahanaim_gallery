@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/tenant_provider.dart';
 import '../models/tenant.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddTenantView extends StatefulWidget {
-  const AddTenantView({super.key});
+  const AddTenantView({Key? key}) : super(key: key);
 
   @override
-  State<AddTenantView> createState() => _AddTenantViewState();
+  _AddTenantViewState createState() => _AddTenantViewState();
 }
-
 
 class _AddTenantViewState extends State<AddTenantView> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
-  final _monthlyRentController = TextEditingController();
-  final _leaseFeeController = TextEditingController();
   DateTime _contractStartDate = DateTime.now();
-  DateTime _contractEndDate = DateTime.now().add(const Duration(days: 365));
+  DateTime _contractEndDate = DateTime.now().add(Duration(days: 365));
 
   @override
   Widget build(BuildContext context) {
@@ -51,69 +48,45 @@ class _AddTenantViewState extends State<AddTenantView> {
               decoration: InputDecoration(labelText: localizations.tenantPhoneLabel),
               validator: (value) => value!.isEmpty ? localizations.tenantPhoneValidationError : null,
             ),
-            TextFormField(
-              controller: _monthlyRentController,
-              decoration: InputDecoration(labelText: localizations.monthlyRentLabel),
-              keyboardType: TextInputType.number,
-              validator: (value) => value!.isEmpty ? localizations.monthlyRentValidationError : null,
-            ),
-            TextFormField(
-              controller: _leaseFeeController,
-              decoration: InputDecoration(labelText: localizations.leaseFeeLabel),
-              keyboardType: TextInputType.number,
-              validator: (value) => value!.isEmpty ? localizations.leaseFeeValidationError : null,
-            ),
             ListTile(
               title: Text(localizations.contractStartDateLabel),
               subtitle: Text(_contractStartDate.toString()),
-              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
                   context: context,
                   initialDate: _contractStartDate,
                   firstDate: DateTime(2000),
-                  lastDate: DateTime(2025),
+                  lastDate: DateTime(2100),
                 );
-                if (picked != null && picked != _contractStartDate) {
-                  setState(() {
-                    _contractStartDate = picked;
-                  });
-                }
+                if (picked != null) setState(() => _contractStartDate = picked);
               },
             ),
             ListTile(
               title: Text(localizations.contractEndDateLabel),
               subtitle: Text(_contractEndDate.toString()),
-              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
                   context: context,
                   initialDate: _contractEndDate,
                   firstDate: DateTime(2000),
-                  lastDate: DateTime(2025),
+                  lastDate: DateTime(2100),
                 );
-                if (picked != null && picked != _contractEndDate) {
-                  setState(() {
-                    _contractEndDate = picked;
-                  });
-                }
+                if (picked != null) setState(() => _contractEndDate = picked);
               },
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  tenantProvider.addTenant(Tenant(
+                  final newTenant = Tenant(
                     id: DateTime.now().toString(),
                     name: _nameController.text,
                     email: _emailController.text,
                     phoneNumber: _phoneController.text,
-                    payments: [],
                     contractStartDate: _contractStartDate,
                     contractEndDate: _contractEndDate,
-                    monthlyRent: double.parse(_monthlyRentController.text),
-                    leaseFee: double.parse(_leaseFeeController.text),
-                  ));
+                  );
+                  tenantProvider.addTenant(newTenant);
                   Navigator.pop(context);
                 }
               },
@@ -125,4 +98,3 @@ class _AddTenantViewState extends State<AddTenantView> {
     );
   }
 }
-

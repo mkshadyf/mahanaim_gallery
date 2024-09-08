@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'features/analytics/detailed_insights_view.dart';
-import 'features/dashboard/maindashboard.dart';
+import 'package:mahanaim_gallery/src/features/navigation/main_navigation.dart';
 import 'features/shops/models/shop.dart';
 import 'features/shops/models/tenant.dart';
-import 'features/shops/views/add_shop_view.dart';
+import 'features/shops/views/add_rent_payment_view.dart';
+import 'features/shops/views/add_tenant_view.dart';
 import 'features/shops/views/shop_list_view.dart';
 import 'features/shops/views/shop_details_view.dart';
-import 'features/shops/views/add_tenant_view.dart';
-import 'features/shops/views/tenant_list_view.dart';
+import 'features/shops/views/add_shop_view.dart';
 import 'features/shops/views/tenant_details_view.dart';
-import 'features/auth/views/login_view.dart';
+import 'features/shops/views/tenant_list_view.dart';
 import 'settings/settings_controller.dart';
-import 'settings/settings_view.dart';
+ import 'settings/settings_view.dart';
+import 'splash_screen.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({
-    super.key,
-    required this.settingsController,
-    required this.home,
-  });
+    final SettingsController settingsController;
 
-  final SettingsController settingsController;
-  final Widget home;
+   const MyApp({super.key, required this.settingsController});
 
-  @override
+
+ 
+   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: settingsController,
@@ -40,65 +37,41 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: const [
             Locale('fr', ''),
-            Locale('en', ''),            
+            Locale('en', ''),
           ],
-          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            brightness: Brightness.light,
-            scaffoldBackgroundColor: Colors.white,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-            ),
-            iconTheme: const IconThemeData(color: Colors.blue),
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              selectedItemColor: Colors.blue,
-              unselectedItemColor: Colors.grey,
-            ),
-          ),
-          darkTheme: ThemeData(
-            primarySwatch: Colors.blue,
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: Colors.grey[900],
-            appBarTheme: AppBarTheme(
-              backgroundColor: Colors.blue[700],
-              foregroundColor: Colors.white,
-            ),
-            iconTheme: IconThemeData(color: Colors.blue[300]),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
-              selectedItemColor: Colors.blue[300],
-              unselectedItemColor: Colors.grey[400],
-            ),
-          ),
-          themeMode: settingsController.themeMode,
-          locale: settingsController.locale,
-          home: home,
-          routes: {
-            '/dashboard': (context) => const MainDashboard(),
-            '/add_shop': (context) => const AddShopView(),
-            '/shop_list': (context) => const ShopListView(),
-            '/add_tenant': (context) => const AddTenantView(),
-            '/tenant_list': (context) => const TenantListView(),
-            '/login': (context) => const LoginView(),
-              '/detailed_insights': (context) => const DetailedInsightsView(),
+          locale: settingsController.locale, // Apply the current locale
 
-          },
+          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
+          theme: ThemeData(),
+          darkTheme: ThemeData.dark(),
+          themeMode: settingsController.themeMode,
+          initialRoute: '/splash',
           onGenerateRoute: (RouteSettings routeSettings) {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
+                  case '/splash':
+                    return const SplashScreen();
+                 case '/':
+                    return MainNavigation(settingsController: settingsController);
+
+                  case '/shop_details':
+                    return ShopDetailsView(shop: routeSettings.arguments as Shop);
+                  case '/add_shop':
+                    return const AddShopView();
+                  case '/tenant_list':
+                    return const TenantListView();
+                  case '/tenant_details':
+                    return TenantDetailsView(tenant: routeSettings.arguments as Tenant);
+                  case '/add_tenant':
+                    return const AddTenantView();
+                  case '/add_rent_payment': // Add the new route
+                    return const AddRentPaymentView();  
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  case '/shop_details':
-                    final shop = routeSettings.arguments as Shop;
-                    return ShopDetailsView(shop: shop);
-                  case '/tenant_details':
-                    final tenant = routeSettings.arguments as Tenant;
-                    return TenantDetailsView(tenant: tenant);
                   default:
-                    return const MainDashboard();
+                    return const ShopListView();
                 }
               },
             );
@@ -108,3 +81,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

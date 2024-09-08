@@ -26,8 +26,7 @@ class SettingsController with ChangeNotifier {
     await _settingsService.updateThemeMode(newThemeMode);
   }
 
- Future<void> updateLocale(Locale? newLocale) async {
-    if (newLocale == null) return;
+  Future<void> updateLocale(Locale newLocale) async {
     if (newLocale == _locale) return;
     _locale = newLocale;
     notifyListeners();

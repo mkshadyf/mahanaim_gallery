@@ -1,3 +1,11 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "sourcegraph.cody-ai.storageUri": "C:\\Users\\Shady\\.vscode\\extensions\\sourcegraph.cody-ai-1.34.1\\resources\\data",
+    "sourcegraph.cody-ai.globalStorageUri": "C:\\Users\\Shady\\.vscode\\extensions\\sourcegraph.cody-ai-1.34.1\\resources\\data",
+    "workbench.cloudChanges.autoResume": "off",
+    "workbench.cloudChanges.continueOn": "off",
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "json.schemaDownload.enable": false,
+    "npm.fetchOnlinePackageInfo": false,
+    "typescript.disableAutomaticTypeAcquisition": true
 }

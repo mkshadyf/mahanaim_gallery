@@ -20,7 +20,11 @@ class TenantService {
     await _tenantRepository.deleteTenant(tenantId);
   }
 
-  Future<void> addPayment(String tenantId, Payment payment) async {
-    await _tenantRepository.addPayment(tenantId, payment);
+  Future<List<Tenant>> searchTenants(String query) async {
+    return await _tenantRepository.searchTenants(query);
+  }
+
+  Future<Tenant?> fetchTenantById(String tenantId) async {
+    return await _tenantRepository.fetchTenantById(tenantId);
   }
 }

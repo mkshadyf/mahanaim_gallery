@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/shop_provider.dart';
-import 'shop_details_view.dart';
+import 'package:mahanaim_gallery/src/features/shops/providers/shop_provider.dart';
+import 'package:mahanaim_gallery/src/features/shops/models/shop.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ShopListView extends StatelessWidget {
+class ShopListView extends StatefulWidget {
   const ShopListView({super.key});
+
+  @override
+  State<ShopListView> createState() => _ShopListViewState();
+}
+
+class _ShopListViewState extends State<ShopListView> {
+  final _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ShopProvider>(context, listen: false).loadShops();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,37 +29,56 @@ class ShopListView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.shopListTitle),
+        title: Text(localizations.shopsTitle),
       ),
-      body: shopProvider.isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: localizations.searchShopsHint,
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: const BorderSide(),
+                ),
+              ),
+              onChanged: (query) {
+                shopProvider.searchShops(query);
+              },
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
               itemCount: shopProvider.shops.length,
               itemBuilder: (context, index) {
-                final shop = shopProvider.shops[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(shop.name),
-                    subtitle: Text(shop.description),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ShopDetailsView(shop: shop),
-                        ),
-                      );
-                    },
-                  ),
+                Shop shop = shopProvider.shops[index];
+                return ListTile(
+                  title: Text(shop.name),
+                  subtitle: Text(shop.tenant != null ? shop.tenant!.name : localizations.noTenantAssigned),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/shop_details',
+                      arguments: shop,
+                    );
+                  },
                 );
               },
             ),
-    floatingActionButton: FloatingActionButton(
-  onPressed: () {
-    Navigator.pushNamed(context, '/add_shop');
-  },
-  child: const Icon(Icons.add),
-),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add_shop');
+        },
+        tooltip: localizations.addShopTooltip,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

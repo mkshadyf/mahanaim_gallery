@@ -48,7 +48,11 @@ class SettingsView extends StatelessWidget {
             ),
             DropdownButton<Locale>(
               value: controller.locale,
-              onChanged: controller.updateLocale,
+              onChanged: (locale) {
+                if (locale != null) {
+                  controller.updateLocale(locale);
+                }
+              },
               items: [
                 DropdownMenuItem(
                   value: const Locale('en'),
@@ -56,6 +60,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 DropdownMenuItem(
                   value: const Locale('fr'),
+     
                   child: Text(AppLocalizations.of(context)!.frenchLanguage),
                 ),
               ],

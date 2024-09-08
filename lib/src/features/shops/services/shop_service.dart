@@ -20,11 +20,12 @@ class ShopService {
     await _shopRepository.deleteShop(shopId);
   }
 
-  Future<void> addTenantToShop(String shopId, String tenantId) async {
-    await _shopRepository.addTenantToShop(shopId, tenantId);
+  Future<List<Shop>> searchShops(String query) async {
+    return await _shopRepository.searchShops(query);
   }
 
-  Future<void> removeTenantFromShop(String shopId, String tenantId) async {
-    await _shopRepository.removeTenantFromShop(shopId, tenantId);
+  Future<Shop?> fetchShopById(String shopId) async {
+    return await _shopRepository.fetchShopById(shopId);
   }
-}
+
+  Future<void> addRentPayment(String shopId, RentPayment payment)

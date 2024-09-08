@@ -5,25 +5,33 @@ class Tenant {
   final String name;
   final String email;
   final String phoneNumber;
-  final List<Payment> payments;
   final DateTime contractStartDate;
   final DateTime contractEndDate;
-  final double monthlyRent;
-  final double leaseFee;
+  String? assignedShopId;
   NotificationSettings notificationSettings;
+  int leaseViolations;
+  String preferredCommunicationMethod;
+  DateTime? _lastPaymentDate;
 
   Tenant({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
-    required this.payments,
     required this.contractStartDate,
     required this.contractEndDate,
-    required this.monthlyRent,
-    required this.leaseFee,
+    this.assignedShopId,
     this.notificationSettings = const NotificationSettings(),
-  });
+    this.leaseViolations = 0,
+    this.preferredCommunicationMethod = 'email',
+    DateTime? lastPaymentDate,
+  }) : _lastPaymentDate = lastPaymentDate;
+
+  DateTime? get lastPaymentDate => _lastPaymentDate;
+
+  void updateLastPaymentDate(DateTime date) {
+    _lastPaymentDate = date;
+  }
 
   factory Tenant.fromMap(Map<String, dynamic> map) {
     return Tenant(
@@ -31,11 +39,12 @@ class Tenant {
       name: map['name'],
       email: map['email'],
       phoneNumber: map['phoneNumber'],
-      payments: (map['payments'] as List).map((p) => Payment.fromMap(p)).toList(),
       contractStartDate: DateTime.parse(map['contractStartDate']),
       contractEndDate: DateTime.parse(map['contractEndDate']),
-      monthlyRent: map['monthlyRent'],
-      leaseFee: map['leaseFee'],
+      assignedShopId: map['assignedShopId'],
+      leaseViolations: map['leaseViolations'] ?? 0,
+      preferredCommunicationMethod: map['preferredCommunicationMethod'] ?? 'email',
+      lastPaymentDate: map['lastPaymentDate'] != null ? DateTime.parse(map['lastPaymentDate']) : null,
     );
   }
 
@@ -45,43 +54,12 @@ class Tenant {
       'name': name,
       'email': email,
       'phoneNumber': phoneNumber,
-      'payments': payments.map((p) => p.toMap()).toList(),
       'contractStartDate': contractStartDate.toIso8601String(),
       'contractEndDate': contractEndDate.toIso8601String(),
-      'monthlyRent': monthlyRent,
-      'leaseFee': leaseFee,
-    };
-  }
-}
-
-class Payment {
-  final DateTime date;
-  final double amount;
-  final double amountDue;
-  final String type;
-
-  Payment({
-    required this.date,
-    required this.amount,
-    required this.amountDue,
-    required this.type,
-  });
-
-  factory Payment.fromMap(Map<String, dynamic> map) {
-    return Payment(
-      date: DateTime.parse(map['date']),
-      amount: map['amount'],
-      amountDue: map['amountDue'],
-      type: map['type'],
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'date': date.toIso8601String(),
-      'amount': amount,
-      'amountDue': amountDue,
-      'type': type,
+      'assignedShopId': assignedShopId,
+      'leaseViolations': leaseViolations,
+      'preferredCommunicationMethod': preferredCommunicationMethod,
+      'lastPaymentDate': _lastPaymentDate?.toIso8601String(),
     };
   }
 }

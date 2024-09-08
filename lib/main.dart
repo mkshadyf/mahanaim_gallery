@@ -1,21 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'src/features/shops/providers/tenant_provider.dart';
 import 'src/app.dart';
 import 'src/features/auth/auth_provider.dart';
 import 'src/features/notifications/notification_provider.dart';
 import 'src/features/shops/providers/shop_provider.dart';
+import 'src/features/shops/providers/tenant_provider.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
-import 'src/features/navigation/main_navigation.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
- // await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final notificationProvider = NotificationProvider();
   await notificationProvider.initialize();
@@ -35,13 +32,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => shopProvider),
         ChangeNotifierProvider(create: (_) => tenantProvider),
         ChangeNotifierProvider.value(value: settingsController),
-
-
       ],
-     child: MyApp(
-      settingsController: settingsController,
-      home: MainNavigation(settingsController: settingsController),
-    ),
+      child: MyApp(
+        settingsController: settingsController,
+      ),
     ),
   );
 }
