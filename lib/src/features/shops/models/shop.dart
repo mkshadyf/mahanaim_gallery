@@ -14,6 +14,7 @@ class Shop {
   final double leaseAmount;
   final DateTime? leasePaymentDate;
   final List<RentPayment> rentPayments;
+  final bool isOccupied;
 
   Shop({
     required this.id,
@@ -27,6 +28,7 @@ class Shop {
     required this.leaseAmount,
     this.leasePaymentDate,
     this.rentPayments = const [],
+    required this.isOccupied,
   });
 
   factory Shop.fromMap(Map<String, dynamic> map) {
@@ -49,6 +51,7 @@ class Shop {
               ?.map((payment) => RentPayment.fromMap(payment))
               .toList() ??
           [],
+      isOccupied: map['isOccupied'] ?? false,
     );
   }
 
@@ -59,9 +62,8 @@ class Shop {
       'description': description,
       'tenant': tenant?.toMap(),
       'dateCreated': Timestamp.fromDate(dateCreated),
-      'contractEndDate': contractEndDate != null
-          ? Timestamp.fromDate(contractEndDate!)
-          : null,
+      'contractEndDate':
+          contractEndDate != null ? Timestamp.fromDate(contractEndDate!) : null,
       'contractLength': contractLength,
       'rentAmount': rentAmount,
       'leaseAmount': leaseAmount,
@@ -69,10 +71,11 @@ class Shop {
           ? Timestamp.fromDate(leasePaymentDate!)
           : null,
       'rentPayments': rentPayments.map((payment) => payment.toMap()).toList(),
+      'isOccupied': isOccupied,
     };
   }
 
-  bool get isOccupied => tenant != null;
+  bool get isShopOccupied => tenant != null;
 
   double getTotalRentPaid() {
     return rentPayments.fold(0, (sum, payment) => sum + payment.amount);
@@ -83,8 +86,8 @@ class Shop {
       return true;
     }
     final lastPaymentDate = rentPayments.last.date;
-    final nextPaymentDueDate = DateTime(lastPaymentDate.year,
-        lastPaymentDate.month + 1, lastPaymentDate.day);
+    final nextPaymentDueDate = DateTime(
+        lastPaymentDate.year, lastPaymentDate.month + 1, lastPaymentDate.day);
     return nextPaymentDueDate.isBefore(DateTime.now());
   }
 }

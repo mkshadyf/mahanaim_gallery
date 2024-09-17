@@ -22,6 +22,8 @@ dependencies:
     sdk: flutter
   logger: ^2.4.0
   logging: ^1.2.0
+  pdf: ^3.11.1
+  printing: ^5.13.2
   provider: ^6.1.2
   shared_preferences: ^2.3.2
   syncfusion_flutter_charts: ^26.2.13

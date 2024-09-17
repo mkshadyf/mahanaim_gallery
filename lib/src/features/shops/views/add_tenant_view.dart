@@ -5,7 +5,7 @@ import '../models/tenant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddTenantView extends StatefulWidget {
-  const AddTenantView({Key? key}) : super(key: key);
+  const AddTenantView({super.key});
 
   @override
   _AddTenantViewState createState() => _AddTenantViewState();
@@ -17,7 +17,7 @@ class _AddTenantViewState extends State<AddTenantView> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   DateTime _contractStartDate = DateTime.now();
-  DateTime _contractEndDate = DateTime.now().add(Duration(days: 365));
+  DateTime _contractEndDate = DateTime.now().add(const Duration(days: 365));
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +35,27 @@ class _AddTenantViewState extends State<AddTenantView> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: localizations.tenantNameLabel),
-              validator: (value) => value!.isEmpty ? localizations.tenantNameValidationError : null,
+              decoration:
+                  InputDecoration(labelText: localizations.tenantNameLabel),
+              validator: (value) => value!.isEmpty
+                  ? localizations.tenantNameValidationError
+                  : null,
             ),
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: localizations.tenantEmailLabel),
-              validator: (value) => value!.isEmpty ? localizations.tenantEmailValidationError : null,
+              decoration:
+                  InputDecoration(labelText: localizations.tenantEmailLabel),
+              validator: (value) => value!.isEmpty
+                  ? localizations.tenantEmailValidationError
+                  : null,
             ),
             TextFormField(
               controller: _phoneController,
-              decoration: InputDecoration(labelText: localizations.tenantPhoneLabel),
-              validator: (value) => value!.isEmpty ? localizations.tenantPhoneValidationError : null,
+              decoration:
+                  InputDecoration(labelText: localizations.tenantPhoneLabel),
+              validator: (value) => value!.isEmpty
+                  ? localizations.tenantPhoneValidationError
+                  : null,
             ),
             ListTile(
               title: Text(localizations.contractStartDateLabel),
@@ -74,7 +83,7 @@ class _AddTenantViewState extends State<AddTenantView> {
                 if (picked != null) setState(() => _contractEndDate = picked);
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -83,8 +92,7 @@ class _AddTenantViewState extends State<AddTenantView> {
                     name: _nameController.text,
                     email: _emailController.text,
                     phoneNumber: _phoneController.text,
-                    contractStartDate: _contractStartDate,
-                    contractEndDate: _contractEndDate,
+                    moveInDate: _contractStartDate,
                   );
                   tenantProvider.addTenant(newTenant);
                   Navigator.pop(context);

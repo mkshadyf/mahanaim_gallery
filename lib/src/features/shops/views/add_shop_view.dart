@@ -16,8 +16,10 @@ class _AddShopViewState extends State<AddShopView> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _rentAmountController = TextEditingController();
-  final _leaseAmountController = TextEditingController(); // New controller for lease amount
-  DateTime? _leasePaymentDate; // New variable for lease payment date
+
+  final _leaseAmountController = TextEditingController();
+  final _contractLengthController = TextEditingController();
+  DateTime? _leasePaymentDate;
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +37,48 @@ class _AddShopViewState extends State<AddShopView> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: localizations.shopNameLabel),
-              validator: (value) => value!.isEmpty ? localizations.shopNameValidationError : null,
+              decoration:
+                  InputDecoration(labelText: localizations.shopNameLabel),
+              validator: (value) =>
+                  value!.isEmpty ? localizations.shopNameValidationError : null,
             ),
             TextFormField(
               controller: _descriptionController,
-              decoration: InputDecoration(labelText: localizations.shopDescriptionLabel),
+              decoration: InputDecoration(
+                  labelText: localizations.shopDescriptionLabel),
             ),
             TextFormField(
               controller: _rentAmountController,
-              decoration: InputDecoration(labelText: localizations.rentAmountLabel),
+              decoration:
+                  InputDecoration(labelText: localizations.rentAmountLabel),
               keyboardType: TextInputType.number,
-              validator: (value) => value!.isEmpty ? localizations.rentAmountValidationError : null,
+              validator: (value) => value!.isEmpty
+                  ? localizations.rentAmountValidationError
+                  : null,
             ),
             TextFormField(
               controller: _leaseAmountController,
-              decoration: InputDecoration(labelText: localizations.leaseAmountLabel),
+              decoration:
+                  InputDecoration(labelText: localizations.leaseAmountLabel),
               keyboardType: TextInputType.number,
-              validator: (value) => value!.isEmpty ? localizations.leaseAmountValidationError : null,
+              validator: (value) => value!.isEmpty
+                  ? localizations.leaseAmountValidationError
+                  : null,
+            ),
+            TextFormField(
+              controller: _contractLengthController,
+              decoration:
+                  InputDecoration(labelText: localizations.contractLengthLabel),
+              keyboardType: TextInputType.number,
+              validator: (value) => value!.isEmpty
+                  ? localizations.contractLengthValidationError
+                  : null,
             ),
             ListTile(
               title: Text(localizations.leasePaymentDateLabel),
-              subtitle: _leasePaymentDate != null ? Text(_leasePaymentDate.toString()) : null,
+              subtitle: _leasePaymentDate != null
+                  ? Text(_leasePaymentDate.toString())
+                  : null,
               trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
@@ -83,6 +105,8 @@ class _AddShopViewState extends State<AddShopView> {
                     rentAmount: double.parse(_rentAmountController.text),
                     leaseAmount: double.parse(_leaseAmountController.text),
                     leasePaymentDate: _leasePaymentDate,
+                    dateCreated: DateTime.now(),
+                    contractLength: int.parse(_contractLengthController.text),
                     rentPayments: [],
                     isOccupied: false,
                   );

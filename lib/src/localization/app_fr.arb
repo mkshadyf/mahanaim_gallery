@@ -356,7 +356,53 @@
   },
   "@paymentHistory": {
     "description": "Label for payment history"
+  },
+  "noTenantAssigned": "Aucun locataire assigné",
+  "@noTenantAssigned": {
+    "description": "Texte affiché lorsqu'aucun locataire n'est assigné à une boutique"
+  },
+  "searchShopsHint": "Rechercher des boutiques...",
+  "@searchShopsHint": {
+    "description": "Texte d'indication pour le champ de recherche de boutiques"
+  },
+  "paymentStrikes": "Incidents de paiement",
+  "@paymentStrikes": {
+    "description": "Étiquette pour le nombre d'incidents de paiement d'un locataire"
+  },
+"leaseAmount": "Montant du bail",
+  "@leaseAmount": {
+    "description": "Label for lease amount"
+  },
+  
+  "leaseAmountLabel": "Montant du bail",
+    "@leaseAmountLabel": {
+      "description": "Étiquette pour le champ de montant du bail"
+    },
+    "leaseAmountValidationError": "Veuillez entrer un montant de bail valide",
+    "@leaseAmountValidationError": {
+      "description": "Message d'erreur pour la validation du montant du bail"
+    },
+    "leasePaymentDateLabel": "Date de paiement du bail",
+    "@leasePaymentDateLabel": {
+      "description": "Étiquette pour le champ de date de paiement du bail"
+    },
+    "occupied": "Occupé",
+  "@occupied": {
+    "description": "Étiquette indiquant qu'une boutique est actuellement occupée"
+  },
+  "vacant": "Vacant",
+  "@vacant": {
+    "description": "Étiquette indiquant qu'une boutique est actuellement vacante"
+  },
+  "noUpcomingLeaseExpirations": "Aucune expiration de bail à venir",
+  "@noUpcomingLeaseExpirations": {
+    "description": "Message affiché lorsqu'il n'y a aucune expiration de bail à venir"
+  },
+  "noOverduePayments": "Aucun paiement en retard",
+  "@noOverduePayments": {
+    "description": "Message affiché lorsqu'il n'y a aucun paiement en retard"
   }
+  
 
 
   

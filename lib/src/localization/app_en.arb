@@ -369,5 +369,52 @@
   },
   "@paymentHistory": {
     "description": "Label for payment history"
-  }
+  },
+    "noTenantAssigned": "No tenant assigned",
+  "@noTenantAssigned": {
+    "description": "Text displayed when no tenant is assigned to a shop"
+  },
+  "searchShopsHint": "Search shops...",
+  "@searchShopsHint": {
+    "description": "Hint text for the search shops input field"
+  },
+  "paymentStrikes": "Payment Strikes",
+  "@paymentStrikes": {
+    "description": "Label for the number of payment strikes a tenant has"
+  },
+  "leaseAmount": "Lease Amount",
+    "@leaseAmount": {
+      "description": "Label for lease amount"
+    },
+    
+      "leaseAmountLabel": "Lease Amount",
+      "@leaseAmountLabel": {
+        "description": "Label for the lease amount input field"
+      },
+      "leaseAmountValidationError": "Please enter a valid lease amount",
+      "@leaseAmountValidationError": {
+        "description": "Validation error message for the lease amount input field"
+      },
+      "leasePaymentDateLabel": "Lease Payment Date",
+      "@leasePaymentDateLabel": {
+        "description": "Label for the lease payment date input field"
+      },
+      "occupied": "Occupied",
+      "@occupied": {
+        "description": "Label indicating a shop is currently occupied"
+      },
+      "vacant": "Vacant",
+      "@vacant": {
+        "description": "Label indicating a shop is currently vacant"
+      },
+      "noUpcomingLeaseExpirations": "No upcoming lease expirations",
+      "@noUpcomingLeaseExpirations": {
+        "description": "Message displayed when there are no upcoming lease expirations"
+      },
+      "noOverduePayments": "No overdue payments",
+      "@noOverduePayments": {
+        "description": "Message displayed when there are no overdue payments"
+      }
+    
+  
 }

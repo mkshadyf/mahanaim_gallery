@@ -9,14 +9,18 @@ class TenantProvider extends ChangeNotifier {
 
   List<Tenant> get tenants => _tenants;
   bool get isLoading => _isLoading;
+  String? _error;
+  String? get error => _error;
 
   Future<void> loadTenants() async {
     _isLoading = true;
+    _error = null; // Reset error on new load
     notifyListeners();
     try {
       _tenants = await _tenantRepository.fetchTenants();
     } catch (e) {
       print('Error loading tenants: $e');
+      _error = 'Failed to load tenants'; // Set error message
     }
     _isLoading = false;
     notifyListeners();
