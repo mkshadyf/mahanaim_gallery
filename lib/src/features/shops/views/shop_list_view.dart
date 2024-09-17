@@ -40,10 +40,6 @@ class _ShopListViewState extends State<ShopListView> {
               decoration: InputDecoration(
                 hintText: localizations.searchShopsHint,
                 prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  borderSide: const BorderSide(),
-                ),
               ),
               onChanged: (query) {
                 shopProvider.searchShops(query);

@@ -28,4 +28,7 @@ class ShopService {
     return await _shopRepository.fetchShopById(shopId);
   }
 
-  Future<void> addRentPayment(String shopId, RentPayment payment)
+  Future<void> addRentPayment(String shopId, RentPayment payment) async {
+    await _shopRepository.addRentPayment(shopId, payment);
+  }
+}

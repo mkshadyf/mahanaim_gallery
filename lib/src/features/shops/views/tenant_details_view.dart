@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+//import 'package:provider/provider.dart';
 import '../models/tenant.dart';
-import '../providers/shop_provider.dart';
-import 'package:provider/provider.dart';
+//import '../providers/tenant_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TenantDetailsView extends StatelessWidget {
@@ -11,7 +11,7 @@ class TenantDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shopProvider = Provider.of<ShopProvider>(context);
+  //  final tenantProvider = Provider.of<TenantProvider>(context);
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -19,45 +19,34 @@ class TenantDetailsView extends StatelessWidget {
         title: Text(localizations.tenantDetailsTitle),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(tenant.name, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 8),
-            Text('${localizations.emailLabel}: ${tenant.email}'),
-            Text('${localizations.phoneNumber}: ${tenant.phoneNumber}'),
-            const SizedBox(height: 16),
-            Text('${localizations.contractStartDateLabel}: ${tenant.contractStartDate.toString()}'),
-            Text('${localizations.contractEndDateLabel}: ${tenant.contractEndDate.toString()}'),
-            const SizedBox(height: 16),
-            Text(localizations.assignedShopLabel, style: Theme.of(context).textTheme.headlineSmall),
-            tenant.assignedShopId != null
-                ? FutureBuilder(
-                    future: shopProvider.getShopById(tenant.assignedShopId!),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('${localizations.errorLoadingShop}: ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        final shop = snapshot.data;
-                        return ListTile(
-                          title: Text(shop!.name),
-                          subtitle: Text('${localizations.rentAmount}: \$${shop.rentAmount.toStringAsFixed(2)}'),
-                        );
-                      } else {
-                        return Text(localizations.noAssignedShop);
-                      }
-                    }
-                  )
-                : Text(localizations.noAssignedShop),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(tenant.name, style: Theme.of(context).textTheme.headlineMedium),
+                    const SizedBox(height: 8),
+                    Text(tenant.email),
+                    Text(tenant.phoneNumber),
+                    const SizedBox(height: 16),
+                    Text(localizations.contractDetails, style: Theme.of(context).textTheme.headlineSmall),
+                    Text('${localizations.startDate}: ${tenant.moveInDate?.toString() ?? ''}'),
+                    Text('${localizations.paymentStrikes}: ${tenant.paymentStrikes}'),
+                  ],
+                ),
+              ),
+            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                // Navigate to edit tenant screen
+                Navigator.pushNamed(context, '/add_rent_payment', arguments: tenant);
               },
-              child: Text(localizations.editTenantButton),
+              child: Text(localizations.addRentPayment),
             ),
           ],
         ),

@@ -1,5 +1,5 @@
-import '../models/tenant.dart';
-import '../repositories/tenant_repository.dart';
+import 'package:mahanaim_gallery/src/features/shops/models/tenant.dart';
+import 'package:mahanaim_gallery/src/features/shops/repositories/tenant_repository.dart';
 
 class TenantService {
   final TenantRepository _tenantRepository = TenantRepository();
@@ -18,13 +18,5 @@ class TenantService {
 
   Future<void> deleteTenant(String tenantId) async {
     await _tenantRepository.deleteTenant(tenantId);
-  }
-
-  Future<List<Tenant>> searchTenants(String query) async {
-    return await _tenantRepository.searchTenants(query);
-  }
-
-  Future<Tenant?> fetchTenantById(String tenantId) async {
-    return await _tenantRepository.fetchTenantById(tenantId);
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/shop.dart';
-import '../models/tenant.dart';
 import '../providers/shop_provider.dart';
 import '../providers/tenant_provider.dart';
+import '../models/shop.dart';
+import '../models/tenant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddRentPaymentView extends StatefulWidget {
@@ -18,16 +18,22 @@ class AddRentPaymentView extends StatefulWidget {
 
 class _AddRentPaymentViewState extends State<AddRentPaymentView> {
   final _formKey = GlobalKey<FormState>();
-  final _amountController = TextEditingController();
-  DateTime _selectedDate = DateTime.now();
   Shop? _selectedShop;
   Tenant? _selectedTenant;
+  final _amountController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
+  PaymentType _selectedPaymentType = PaymentType.rent;
+  int _selectedMonth = DateTime.now().month;
 
   @override
   void initState() {
     super.initState();
     _selectedShop = widget.shop;
     _selectedTenant = widget.tenant;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ShopProvider>(context, listen: false).loadShops();
+      Provider.of<TenantProvider>(context, listen: false).loadTenants();
+    });
   }
 
   @override
@@ -45,50 +51,53 @@ class _AddRentPaymentViewState extends State<AddRentPaymentView> {
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
-            if (_selectedShop == null)
-              DropdownButtonFormField<Shop>(
-                decoration: InputDecoration(labelText: localizations.selectShop),
-                items: shopProvider.shops.map((Shop shop) {
-                  return DropdownMenuItem<Shop>(
-                    value: shop,
-                    child: Text(shop.name),
-                  );
-                }).toList(),
-                onChanged: (Shop? newValue) {
-                  setState(() {
-                    _selectedShop = newValue;
-                  });
-                },
-                validator: (value) => value == null ? localizations.selectShopValidation : null,
-              ),
-            if (_selectedTenant == null)
-              DropdownButtonFormField<Tenant>(
-                decoration: InputDecoration(labelText: localizations.selectTenant),
-                items: tenantProvider.tenants.map((Tenant tenant) {
-                  return DropdownMenuItem<Tenant>(
-                    value: tenant,
-                    child: Text(tenant.name),
-                  );
-                }).toList(),
-                onChanged: (Tenant? newValue) {
-                  setState(() {
-                    _selectedTenant = newValue;
-                  });
-                },
-                validator: (value) => value == null ? localizations.selectTenantValidation : null,
-              ),
+            DropdownButtonFormField<Shop>(
+              value: _selectedShop,
+              decoration: InputDecoration(labelText: localizations.selectShop),
+              items: shopProvider.shops.map((shop) {
+                return DropdownMenuItem(
+                  value: shop,
+                  child: Text(shop.name),
+                );
+              }).toList(),
+              onChanged: (shop) {
+                setState(() {
+                  _selectedShop = shop;
+                  // Reset selected tenant when shop changes
+                  _selectedTenant = null;
+                });
+              },
+              validator: (value) => value == null ? localizations.selectShopValidation : null,
+            ),
+            DropdownButtonFormField<Tenant>(
+              value: _selectedTenant,
+              decoration: InputDecoration(labelText: localizations.selectTenant),
+              items: _selectedShop != null
+                  ? tenantProvider.tenants
+                      .where((tenant) => _selectedShop!.tenant?.id == tenant.id)
+                      .map((tenant) {
+                      return DropdownMenuItem(
+                        value: tenant,
+                        child: Text(tenant.name),
+                      );
+                    }).toList()
+                  : [],
+              onChanged: (tenant) {
+                setState(() {
+                  _selectedTenant = tenant;
+                });
+              },
+              validator: (value) => value == null ? localizations.selectTenantValidation : null,
+            ),
             TextFormField(
               controller: _amountController,
-              decoration: InputDecoration(
-                labelText: localizations.amount,
-                suffixText: 'USD',
-              ),
+              decoration: InputDecoration(labelText: localizations.amount),
               keyboardType: TextInputType.number,
               validator: (value) => value!.isEmpty ? localizations.amountValidation : null,
             ),
             ListTile(
               title: Text(localizations.date),
-              subtitle: Text(_selectedDate.toLocal().toString()),
+              subtitle: Text(_selectedDate.toString()),
               trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
@@ -104,6 +113,36 @@ class _AddRentPaymentViewState extends State<AddRentPaymentView> {
                 }
               },
             ),
+            DropdownButtonFormField<PaymentType>(
+              value: _selectedPaymentType,
+              decoration: const InputDecoration(labelText: 'Payment Type'),
+              items: PaymentType.values.map((type) {
+                return DropdownMenuItem(
+                  value: type,
+                  child: Text(type.name.toUpperCase()),
+                );
+              }).toList(),
+              onChanged: (type) {
+                setState(() {
+                  _selectedPaymentType = type!;
+                });
+              },
+            ),
+            DropdownButtonFormField<int>(
+              value: _selectedMonth,
+              decoration: const InputDecoration(labelText: 'Month'),
+              items: List.generate(12, (index) {
+                return DropdownMenuItem(
+                  value: index + 1,
+                  child: Text((index + 1).toString()),
+                );
+              }),
+              onChanged: (month) {
+                setState(() {
+                  _selectedMonth = month!;
+                });
+              },
+            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
@@ -112,8 +151,9 @@ class _AddRentPaymentViewState extends State<AddRentPaymentView> {
                     tenantId: _selectedTenant!.id,
                     date: _selectedDate,
                     amount: double.parse(_amountController.text),
+                    paymentType: _selectedPaymentType,
+                    month: _selectedMonth,
                   );
-
                   shopProvider.addRentPayment(_selectedShop!.id, newPayment);
                   Navigator.pop(context);
                 }

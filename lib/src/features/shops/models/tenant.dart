@@ -1,37 +1,21 @@
-import '../../notifications/models/notificationsettings.dart';
-
 class Tenant {
   final String id;
   final String name;
   final String email;
   final String phoneNumber;
-  final DateTime contractStartDate;
-  final DateTime contractEndDate;
-  String? assignedShopId;
-  NotificationSettings notificationSettings;
-  int leaseViolations;
-  String preferredCommunicationMethod;
-  DateTime? _lastPaymentDate;
+  bool isOccupying; // New field for occupancy status
+  DateTime? moveInDate; // New field for move-in date
+  int paymentStrikes; // New field for payment strikes
 
   Tenant({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
-    required this.contractStartDate,
-    required this.contractEndDate,
-    this.assignedShopId,
-    this.notificationSettings = const NotificationSettings(),
-    this.leaseViolations = 0,
-    this.preferredCommunicationMethod = 'email',
-    DateTime? lastPaymentDate,
-  }) : _lastPaymentDate = lastPaymentDate;
-
-  DateTime? get lastPaymentDate => _lastPaymentDate;
-
-  void updateLastPaymentDate(DateTime date) {
-    _lastPaymentDate = date;
-  }
+    this.isOccupying = false, // Initialize occupancy status
+    this.moveInDate, // Initialize move-in date
+    this.paymentStrikes = 0, // Initialize payment strikes
+  });
 
   factory Tenant.fromMap(Map<String, dynamic> map) {
     return Tenant(
@@ -39,12 +23,9 @@ class Tenant {
       name: map['name'],
       email: map['email'],
       phoneNumber: map['phoneNumber'],
-      contractStartDate: DateTime.parse(map['contractStartDate']),
-      contractEndDate: DateTime.parse(map['contractEndDate']),
-      assignedShopId: map['assignedShopId'],
-      leaseViolations: map['leaseViolations'] ?? 0,
-      preferredCommunicationMethod: map['preferredCommunicationMethod'] ?? 'email',
-      lastPaymentDate: map['lastPaymentDate'] != null ? DateTime.parse(map['lastPaymentDate']) : null,
+      isOccupying: map['isOccupying'] ?? false, // Get occupancy status from map
+      moveInDate: map['moveInDate'] != null ? DateTime.parse(map['moveInDate']) : null, // Get move-in date from map
+      paymentStrikes: map['paymentStrikes'] ?? 0, // Get payment strikes from map
     );
   }
 
@@ -54,12 +35,9 @@ class Tenant {
       'name': name,
       'email': email,
       'phoneNumber': phoneNumber,
-      'contractStartDate': contractStartDate.toIso8601String(),
-      'contractEndDate': contractEndDate.toIso8601String(),
-      'assignedShopId': assignedShopId,
-      'leaseViolations': leaseViolations,
-      'preferredCommunicationMethod': preferredCommunicationMethod,
-      'lastPaymentDate': _lastPaymentDate?.toIso8601String(),
+      'isOccupying': isOccupying, // Add occupancy status to map
+      'moveInDate': moveInDate?.toIso8601String(), // Add move-in date to map
+      'paymentStrikes': paymentStrikes, // Add payment strikes to map
     };
   }
 }

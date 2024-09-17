@@ -1,77 +1,90 @@
 import 'package:flutter/foundation.dart';
 import '../models/shop.dart';
-import '../services/shop_service.dart';
+import '../repositories/shop_repository.dart';
 
 class ShopProvider extends ChangeNotifier {
-  final ShopService _shopService = ShopService();
+  final ShopRepository _shopRepository = ShopRepository();
   List<Shop> _shops = [];
+  List<Shop> _searchResults = [];
   bool _isLoading = false;
-  String? _error;
 
-  List<Shop> get shops => _shops;
+  List<Shop> get shops => _searchResults.isEmpty ? _shops : _searchResults;
   bool get isLoading => _isLoading;
-  String? get error => _error;
 
   Future<void> loadShops() async {
     _isLoading = true;
-    _error = null;
     notifyListeners();
-
     try {
-      _shops = await _shopService.fetchShops();
+      _shops = await _shopRepository.fetchShops();
     } catch (e) {
-      _error = 'Failed to load shops: $e';
+      print('Error loading shops: $e');
     }
-
     _isLoading = false;
     notifyListeners();
   }
 
   Future<void> addShop(Shop shop) async {
-    await _shopService.addShop(shop);
-    await loadShops();
-  }
-
-  Future<void> updateShop(Shop shop) async {
-    await _shopService.updateShop(shop);
-    await loadShops();
-  }
-
-  Future<void> deleteShop(String shopId) async {
-    await _shopService.deleteShop(shopId);
-    await loadShops();
-  }
-
-  Future<void> searchShops(String query) async {
     _isLoading = true;
     notifyListeners();
-
     try {
-      _shops = await _shopService.searchShops(query);
+      await _shopRepository.addShop(shop);
+      await loadShops();
     } catch (e) {
-      _error = 'Failed to search shops: $e';
+      print('Error adding shop: $e');
     }
-
     _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> addRentPayment(String shopId, RentPayment payment) async {
-    await _shopService.addRentPayment(shopId, payment);
-    await loadShops();
+  Future<void> updateShop(Shop shop) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      await _shopRepository.updateShop(shop);
+      await loadShops();
+    } catch (e) {
+      print('Error updating shop: $e');
+    }
+    _isLoading = false;
+    notifyListeners();
   }
 
   double get totalRevenue {
-    return _shops.fold(0, (sum, shop) => sum + shop.rentAmount);
+    double total = 0;
+    for (var shop in _shops) {
+      total += shop.rentAmount;
+      total += shop.leaseAmount;
+      for (var payment in shop.rentPayments) {
+        total += payment.amount;
+      }
+    }
+    return total;
   }
 
-  double get occupancyRate {
-    if (_shops.isEmpty) return 0;
-    int occupiedShops = _shops.where((shop) => !shop.isAvailable).length;
-    return occupiedShops / _shops.length;
+  Future<void> deleteShop(String shopId) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      await _shopRepository.deleteShop(shopId);
+      await loadShops();
+    } catch (e) {
+      print('Error deleting shop: $e');
+    }
+    _isLoading = false;
+    notifyListeners();
   }
 
-  int get overduePayments {
-    return _shops.fold(0, (sum, shop) => sum + (shop.isPaymentOverdue() ? 1 : 0));
+  void searchShops(String query) {
+    if (query.isEmpty) {
+      _searchResults = [];
+    } else {
+      _searchResults = _shops
+          .where((shop) =>
+              shop.name.toLowerCase().contains(query.toLowerCase()) ||
+              (shop.tenant != null &&
+                  shop.tenant!.name.toLowerCase().contains(query.toLowerCase())))
+          .toList();
+    }
+    notifyListeners();
   }
 }

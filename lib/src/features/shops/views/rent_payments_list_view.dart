@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/shop_provider.dart';
-import '../models/shop.dart';
+import 'package:mahanaim_gallery/src/features/shops/providers/shop_provider.dart';
+import 'package:mahanaim_gallery/src/features/shops/models/shop.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class RentPaymentsView extends StatelessWidget {
+class RentPaymentsView extends StatefulWidget {
   const RentPaymentsView({super.key});
+
+  @override
+  State<RentPaymentsView> createState() => _RentPaymentsViewState();
+}
+
+class _RentPaymentsViewState extends State<RentPaymentsView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ShopProvider>(context, listen: false).loadShops();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +35,7 @@ class RentPaymentsView extends StatelessWidget {
           Shop shop = shopProvider.shops[index];
           return ListTile(
             title: Text(shop.name),
-            subtitle: Text('${localizations.totalRentPaid}: \${shop.getTotalRentPaid().toStringAsFixed(2)}'),
+            subtitle: Text('${localizations.totalRentPaid}: \$${shop.getTotalRentPaid().toStringAsFixed(2)}'),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.pushNamed(

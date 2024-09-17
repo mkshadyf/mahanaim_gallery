@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../dashboard/maindashboard.dart';
-import '../shops/views/add_rent_payment_view.dart';
-import '../shops/views/shop_list_view.dart';
-import '../shops/views/tenant_list_view.dart';
-import '../../settings/settings_view.dart';
+import 'package:mahanaim_gallery/src/features/dashboard/maindashboard.dart';
+import 'package:mahanaim_gallery/src/features/shops/views/shop_list_view.dart';
+import 'package:mahanaim_gallery/src/features/shops/views/tenant_list_view.dart';
+import 'package:mahanaim_gallery/src/settings/settings_view.dart';
 import '../../settings/settings_controller.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -14,7 +13,6 @@ class MainNavigation extends StatefulWidget {
   @override
   State<MainNavigation> createState() => MainNavigationState();
 }
-
 
 class MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0;
@@ -28,7 +26,6 @@ class MainNavigationState extends State<MainNavigation> {
       const ShopListView(),
       const TenantListView(),
       SettingsView(controller: widget.settingsController),
-      const AddRentPaymentView(), // Add the new view
     ];
   }
 
@@ -41,6 +38,9 @@ class MainNavigationState extends State<MainNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mahanaim Gallery'),
+      ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -51,10 +51,6 @@ class MainNavigationState extends State<MainNavigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shop),
             label: 'Shops',
-          ),
-             BottomNavigationBarItem(
-            icon: Icon(Icons.payment),
-            label: 'Add Rent Payment',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
@@ -67,9 +63,6 @@ class MainNavigationState extends State<MainNavigation> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        backgroundColor:  const Color.fromARGB(255, 49, 46, 46),
-        type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
       ),
     );
