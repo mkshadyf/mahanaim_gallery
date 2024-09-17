@@ -1,5 +1,6 @@
-import '../models/shop.dart';
-import '../repositories/shop_repository.dart';
+import 'package:mahanaim_gallery/src/features/shops/models/shop.dart';
+import 'package:mahanaim_gallery/src/features/shops/models/payment.dart';
+import 'package:mahanaim_gallery/src/features/shops/repositories/shop_repository.dart';
 
 class ShopService {
   final ShopRepository _shopRepository = ShopRepository();
@@ -28,7 +29,7 @@ class ShopService {
     return await _shopRepository.fetchShopById(shopId);
   }
 
-  Future<void> addRentPayment(String shopId, RentPayment payment) async {
-    await _shopRepository.addRentPayment(shopId, payment);
+  Future<void> addRentPayment(Payment payment) async {
+    await _shopRepository.addRentPayment(payment);
   }
 }

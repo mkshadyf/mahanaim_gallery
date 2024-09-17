@@ -414,7 +414,49 @@
       "noOverduePayments": "No overdue payments",
       "@noOverduePayments": {
         "description": "Message displayed when there are no overdue payments"
-      }
+      },
+      
+        "paymentType": "Payment Type",
+        "@paymentType": {
+          "description": "Label for payment type"
+        },
+        "shopId": "Shop ID",
+        "@shopId": {
+          "description": "Label for shop ID"
+        },
+        "tenantsWithDuePayments": "Tenants with Due Payments",
+        "@tenantsWithDuePayments": {
+          "description": "Label for the number of tenants with due payments"
+        },
+        "occupiedShops": "Occupied Shops",
+        "@occupiedShops": {
+          "description": "Label for the number of occupied shops"
+        },
+        "totalLeaseCollected": "Total Lease Collected",
+        "@totalLeaseCollected": {
+          "description": "Label for the total amount of lease collected"
+        },
+        "totalRentCollected": "Total Rent Collected",
+        "@totalRentCollected": {
+          "description": "Label for the total amount of rent collected"
+        },
+        "applyFilters": "Apply Filters",
+        "@applyFilters": {
+          "description": "Label for the button to apply filters"
+        },
+        "filters": "Filters",
+        "@filters": {
+          "description": "Label for filters section"
+        },
+        "occupancyRateOverTime": "Occupancy Rate Over Time",
+        "@occupancyRateOverTime": {
+          "description": "Label for the occupancy rate over time chart"
+        },
+        "keyMetrics": "Key Metrics",
+        "@keyMetrics": {
+          "description": "Label for the key metrics section"
+        }
+      
     
   
 }

@@ -53,7 +53,9 @@ class _ShopListViewState extends State<ShopListView> {
                 Shop shop = shopProvider.shops[index];
                 return ListTile(
                   title: Text(shop.name),
-                  subtitle: Text(shop.tenant != null ? shop.tenant!.name : localizations.noTenantAssigned),
+                  subtitle: Text(shop.tenant != null
+                      ? shop.tenant!.name
+                      : localizations.noTenantAssigned),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   onTap: () {
                     Navigator.pushNamed(

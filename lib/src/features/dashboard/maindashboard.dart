@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../notifications/notification_provider.dart';
 import '../analytics/analytics_widget.dart';
 import '../notifications/views/notification_list_view.dart';
+import '../analytics/detailed_insights_view.dart';
 
 class MainDashboard extends StatelessWidget {
   const MainDashboard({super.key});
@@ -24,7 +25,8 @@ class MainDashboard extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const NotificationListView()),
+                    MaterialPageRoute(
+                        builder: (context) => const NotificationListView()),
                   );
                 },
               ),
@@ -85,6 +87,25 @@ class MainDashboard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const AnalyticsWidget(),
+              const SizedBox(height: 16),
+              LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  return SizedBox(
+                    width: constraints.maxWidth,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const DetailedInsightsView()),
+                        );
+                      },
+                      child: Text(localizations.viewDetailedInsights),
+                    ),
+                  );
+                },
+              ),
               const SizedBox(height: 24),
               Text(
                 localizations.recentNotificationsTitle,
@@ -96,7 +117,8 @@ class MainDashboard extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: notificationProvider.recentNotifications.length,
                 itemBuilder: (context, index) {
-                  final notification = notificationProvider.recentNotifications[index];
+                  final notification =
+                      notificationProvider.recentNotifications[index];
                   return ListTile(
                     title: Text(notification.title),
                     subtitle: Text(notification.body),
@@ -112,7 +134,8 @@ class MainDashboard extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const NotificationListView()),
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationListView()),
                     );
                   },
                   child: Text(localizations.viewAllNotificationsButton),

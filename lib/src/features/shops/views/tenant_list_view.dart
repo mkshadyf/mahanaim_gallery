@@ -66,8 +66,10 @@ class _TenantListViewState extends State<TenantListView> {
                               itemCount: tenantProvider.tenants.length,
                               itemBuilder: (context, index) {
                                 Tenant tenant = tenantProvider.tenants[index];
-                                _logger.info('Building list item for tenant: ${tenant.id}');
-                                _logger.info('Tenant data: ${tenant.toString()}');
+                                _logger.info(
+                                    'Building list item for tenant: ${tenant.id}');
+                                _logger
+                                    .info('Tenant data: ${tenant.toString()}');
 
                                 if (_searchQuery.isNotEmpty &&
                                     !tenant.name
@@ -81,10 +83,13 @@ class _TenantListViewState extends State<TenantListView> {
 
                                 String paymentStatus = '';
                                 try {
-                                  paymentStatus = shopProvider.getPaymentStatusForTenant(tenant.id);
-                                  _logger.info('Payment status for tenant ${tenant.id}: $paymentStatus');
+                                  paymentStatus = shopProvider
+                                      .getPaymentStatusForTenant(tenant.id);
+                                  _logger.info(
+                                      'Payment status for tenant ${tenant.id}: $paymentStatus');
                                 } catch (e) {
-                                  _logger.severe('Error getting payment status for tenant ${tenant.id}: $e');
+                                  _logger.severe(
+                                      'Error getting payment status for tenant ${tenant.id}: $e');
                                 }
 
                                 return ListTile(
@@ -92,7 +97,8 @@ class _TenantListViewState extends State<TenantListView> {
                                   subtitle: Text(tenant.email),
                                   trailing: Text(paymentStatus),
                                   onTap: () {
-                                    _logger.info('Tapped on tenant: ${tenant.id}');
+                                    _logger
+                                        .info('Tapped on tenant: ${tenant.id}');
                                     Navigator.pushNamed(
                                       context,
                                       '/tenant_details',

@@ -3,6 +3,7 @@ import 'package:mahanaim_gallery/src/features/dashboard/maindashboard.dart';
 import 'package:mahanaim_gallery/src/features/shops/views/shop_list_view.dart';
 import 'package:mahanaim_gallery/src/features/shops/views/tenant_list_view.dart';
 import 'package:mahanaim_gallery/src/settings/settings_view.dart';
+import 'package:mahanaim_gallery/src/features/shops/views/rent_payments_list_view.dart';
 import '../../settings/settings_controller.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -25,18 +26,28 @@ class MainNavigationState extends State<MainNavigation> {
       const MainDashboard(),
       const ShopListView(),
       const TenantListView(),
-      SettingsView(controller: widget.settingsController),
+      const RentPaymentsView(),
     ];
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 4) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+              SettingsView(controller: widget.settingsController),
+        ),
+      );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mahanaim Gallery'),
@@ -46,7 +57,7 @@ class MainNavigationState extends State<MainNavigation> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
+            label: 'Accueil',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shop),
@@ -54,15 +65,23 @@ class MainNavigationState extends State<MainNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            label: 'Tenants',
+            label: 'Locataires',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payment),
+            label: 'Payments loyers',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: 'Parametres',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
+        unselectedItemColor: isDarkMode ? Colors.white60 : Colors.black54,
+        backgroundColor:
+            Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+        type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
       ),
     );

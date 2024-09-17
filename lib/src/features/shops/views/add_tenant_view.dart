@@ -18,6 +18,7 @@ class _AddTenantViewState extends State<AddTenantView> {
   final _phoneController = TextEditingController();
   DateTime _contractStartDate = DateTime.now();
   DateTime _contractEndDate = DateTime.now().add(const Duration(days: 365));
+  final _contractLengthController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,15 @@ class _AddTenantViewState extends State<AddTenantView> {
                   ? localizations.tenantPhoneValidationError
                   : null,
             ),
+            TextFormField(
+              controller: _contractLengthController,
+              decoration:
+                  InputDecoration(labelText: localizations.contractLengthLabel),
+              keyboardType: TextInputType.number,
+              validator: (value) => value!.isEmpty
+                  ? localizations.contractLengthValidationError
+                  : null,
+            ),
             ListTile(
               title: Text(localizations.contractStartDateLabel),
               subtitle: Text(_contractStartDate.toString()),
@@ -93,6 +103,7 @@ class _AddTenantViewState extends State<AddTenantView> {
                     email: _emailController.text,
                     phoneNumber: _phoneController.text,
                     moveInDate: _contractStartDate,
+                    contractLength: int.parse(_contractLengthController.text),
                   );
                   tenantProvider.addTenant(newTenant);
                   Navigator.pop(context);

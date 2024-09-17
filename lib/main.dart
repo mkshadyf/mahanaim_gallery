@@ -6,6 +6,7 @@ import 'src/features/auth/auth_provider.dart';
 import 'src/features/notifications/notification_provider.dart';
 import 'src/features/shops/providers/shop_provider.dart';
 import 'src/features/shops/providers/tenant_provider.dart';
+import 'src/features/shops/providers/payment_provider.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 import 'firebase_options.dart';
@@ -20,6 +21,7 @@ void main() async {
   final authProvider = AuthProvider();
   final shopProvider = ShopProvider();
   final tenantProvider = TenantProvider();
+  final paymentProvider = PaymentProvider();
 
   final settingsController = SettingsController(SettingsService());
   await settingsController.loadSettings();
@@ -31,6 +33,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => authProvider),
         ChangeNotifierProvider(create: (_) => shopProvider),
         ChangeNotifierProvider(create: (_) => tenantProvider),
+        ChangeNotifierProvider(create: (_) => paymentProvider),
         ChangeNotifierProvider.value(value: settingsController),
       ],
       child: MyApp(

@@ -401,7 +401,49 @@
   "noOverduePayments": "Aucun paiement en retard",
   "@noOverduePayments": {
     "description": "Message affiché lorsqu'il n'y a aucun paiement en retard"
-  }
+  },
+  
+    "paymentType": "Type de paiement",
+    "@paymentType": {
+      "description": "Label for payment type"
+    },
+    "shopId": "ID de la boutique",
+    "@shopId": {
+      "description": "Label for shop ID"
+    },
+    "tenantsWithDuePayments": "Locataires avec paiements dus",
+    "@tenantsWithDuePayments": {
+      "description": "Label for tenants with due payments"
+    },
+    "occupiedShops": "Boutiques occupées",
+    "@occupiedShops": {
+      "description": "Label for occupied shops"
+    },
+    "totalLeaseCollected": "Total des baux collectés",
+    "@totalLeaseCollected": {
+      "description": "Label for total lease collected"
+    },
+    "totalRentCollected": "Total des loyers collectés",
+    "@totalRentCollected": {
+      "description": "Label for total rent collected"
+    },
+    "applyFilters": "Appliquer les filtres",
+    "@applyFilters": {
+      "description": "Label for apply filters button"
+    },
+    "filters": "Filtres",
+    "@filters": {
+      "description": "Label for filters"
+    },
+    "occupancyRateOverTime": "Taux d'occupation dans le temps",
+    "@occupancyRateOverTime": {
+      "description": "Label for occupancy rate over time chart"
+    },
+    "keyMetrics": "Indicateurs clés",
+    "@keyMetrics": {
+      "description": "Label for key metrics section"
+    }
+  
   
 
 

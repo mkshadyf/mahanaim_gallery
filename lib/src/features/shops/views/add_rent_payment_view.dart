@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/shop_provider.dart';
 import '../providers/tenant_provider.dart';
+import '../providers/payment_provider.dart';
 import '../models/shop.dart';
 import '../models/tenant.dart';
+import '../models/payment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddRentPaymentView extends StatefulWidget {
@@ -40,6 +42,7 @@ class _AddRentPaymentViewState extends State<AddRentPaymentView> {
   Widget build(BuildContext context) {
     final shopProvider = Provider.of<ShopProvider>(context);
     final tenantProvider = Provider.of<TenantProvider>(context);
+    final paymentProvider = Provider.of<PaymentProvider>(context);
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -67,11 +70,13 @@ class _AddRentPaymentViewState extends State<AddRentPaymentView> {
                   _selectedTenant = null;
                 });
               },
-              validator: (value) => value == null ? localizations.selectShopValidation : null,
+              validator: (value) =>
+                  value == null ? localizations.selectShopValidation : null,
             ),
             DropdownButtonFormField<Tenant>(
               value: _selectedTenant,
-              decoration: InputDecoration(labelText: localizations.selectTenant),
+              decoration:
+                  InputDecoration(labelText: localizations.selectTenant),
               items: _selectedShop != null
                   ? tenantProvider.tenants
                       .where((tenant) => _selectedShop!.tenant?.id == tenant.id)
@@ -87,13 +92,15 @@ class _AddRentPaymentViewState extends State<AddRentPaymentView> {
                   _selectedTenant = tenant;
                 });
               },
-              validator: (value) => value == null ? localizations.selectTenantValidation : null,
+              validator: (value) =>
+                  value == null ? localizations.selectTenantValidation : null,
             ),
             TextFormField(
               controller: _amountController,
               decoration: InputDecoration(labelText: localizations.amount),
               keyboardType: TextInputType.number,
-              validator: (value) => value!.isEmpty ? localizations.amountValidation : null,
+              validator: (value) =>
+                  value!.isEmpty ? localizations.amountValidation : null,
             ),
             ListTile(
               title: Text(localizations.date),
@@ -147,14 +154,16 @@ class _AddRentPaymentViewState extends State<AddRentPaymentView> {
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  final newPayment = RentPayment(
+                  final newPayment = Payment(
+                    id: DateTime.now().toString(),
+                    shopId: _selectedShop!.id,
                     tenantId: _selectedTenant!.id,
                     date: _selectedDate,
                     amount: double.parse(_amountController.text),
                     paymentType: _selectedPaymentType,
                     month: _selectedMonth,
                   );
-                  shopProvider.addRentPayment(_selectedShop!.id, newPayment);
+                  paymentProvider.addPayment(newPayment);
                   Navigator.pop(context);
                 }
               },

@@ -16,10 +16,7 @@ class _AddShopViewState extends State<AddShopView> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _rentAmountController = TextEditingController();
-
   final _leaseAmountController = TextEditingController();
-  final _contractLengthController = TextEditingController();
-  DateTime? _leasePaymentDate;
 
   @override
   Widget build(BuildContext context) {
@@ -65,35 +62,6 @@ class _AddShopViewState extends State<AddShopView> {
                   ? localizations.leaseAmountValidationError
                   : null,
             ),
-            TextFormField(
-              controller: _contractLengthController,
-              decoration:
-                  InputDecoration(labelText: localizations.contractLengthLabel),
-              keyboardType: TextInputType.number,
-              validator: (value) => value!.isEmpty
-                  ? localizations.contractLengthValidationError
-                  : null,
-            ),
-            ListTile(
-              title: Text(localizations.leasePaymentDateLabel),
-              subtitle: _leasePaymentDate != null
-                  ? Text(_leasePaymentDate.toString())
-                  : null,
-              trailing: const Icon(Icons.calendar_today),
-              onTap: () async {
-                final DateTime? picked = await showDatePicker(
-                  context: context,
-                  initialDate: _leasePaymentDate ?? DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2101),
-                );
-                if (picked != null && picked != _leasePaymentDate) {
-                  setState(() {
-                    _leasePaymentDate = picked;
-                  });
-                }
-              },
-            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
@@ -104,10 +72,7 @@ class _AddShopViewState extends State<AddShopView> {
                     description: _descriptionController.text,
                     rentAmount: double.parse(_rentAmountController.text),
                     leaseAmount: double.parse(_leaseAmountController.text),
-                    leasePaymentDate: _leasePaymentDate,
                     dateCreated: DateTime.now(),
-                    contractLength: int.parse(_contractLengthController.text),
-                    rentPayments: [],
                     isOccupied: false,
                   );
                   shopProvider.addShop(newShop);

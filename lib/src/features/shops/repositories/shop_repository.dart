@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mahanaim_gallery/src/features/shops/models/shop.dart';
+import 'package:mahanaim_gallery/src/features/shops/models/payment.dart';
 
 class ShopRepository {
   final CollectionReference _shopsCollection =
       FirebaseFirestore.instance.collection('shops');
+  final CollectionReference _paymentsCollection =
+      FirebaseFirestore.instance.collection('payments');
 
   Future<List<Shop>> fetchShops() async {
     final querySnapshot = await _shopsCollection.get();
@@ -43,11 +46,7 @@ class ShopRepository {
     }
   }
 
-  Future<void> addRentPayment(String shopId, RentPayment payment) async {
-    final shopDoc = _shopsCollection.doc(shopId);
-    final shopData = (await shopDoc.get()).data() as Map<String, dynamic>;
-    final payments = (shopData['rentPayments'] as List<dynamic>?) ?? [];
-    payments.add(payment.toMap());
-    await shopDoc.update({'rentPayments': payments});
+  Future<void> addRentPayment(Payment payment) async {
+    await _paymentsCollection.add(payment.toMap());
   }
 }

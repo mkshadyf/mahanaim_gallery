@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../models/shop.dart';
+import '../models/payment.dart';
 import '../repositories/shop_repository.dart';
 
 class ShopProvider extends ChangeNotifier {
@@ -85,7 +86,6 @@ class ShopProvider extends ChangeNotifier {
           rentAmount: 0,
           leaseAmount: 0,
           dateCreated: DateTime.now(),
-          contractLength: 0,
           isOccupied: false), // Return an empty shop if not found
     );
 
@@ -102,11 +102,11 @@ class ShopProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addRentPayment(String shopId, RentPayment payment) async {
+  Future<void> addRentPayment(Payment payment) async {
     _isLoading = true;
     notifyListeners();
     try {
-      await _shopRepository.addRentPayment(shopId, payment);
+      await _shopRepository.addRentPayment(payment);
       // After adding the payment, you might want to update the shop data
       await loadShops(); // Or fetch the updated shop data specifically
     } catch (e) {

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'payment.dart';
 import 'tenant.dart';
 
 class Shop {
@@ -8,12 +8,9 @@ class Shop {
   final String description;
   Tenant? tenant;
   final DateTime dateCreated;
-  final DateTime? contractEndDate;
-  final int contractLength; // in months
   final double rentAmount;
   final double leaseAmount;
-  final DateTime? leasePaymentDate;
-  final List<RentPayment> rentPayments;
+  final List<Payment> rentPayments;
   final bool isOccupied;
 
   Shop({
@@ -22,11 +19,8 @@ class Shop {
     required this.description,
     this.tenant,
     required this.dateCreated,
-    this.contractEndDate,
-    required this.contractLength,
     required this.rentAmount,
     required this.leaseAmount,
-    this.leasePaymentDate,
     this.rentPayments = const [],
     required this.isOccupied,
   });
@@ -38,17 +32,10 @@ class Shop {
       description: map['description'],
       tenant: map['tenant'] != null ? Tenant.fromMap(map['tenant']) : null,
       dateCreated: (map['dateCreated'] as Timestamp).toDate(),
-      contractEndDate: map['contractEndDate'] != null
-          ? (map['contractEndDate'] as Timestamp).toDate()
-          : null,
-      contractLength: map['contractLength'],
       rentAmount: map['rentAmount'].toDouble(),
       leaseAmount: map['leaseAmount'].toDouble(),
-      leasePaymentDate: map['leasePaymentDate'] != null
-          ? (map['leasePaymentDate'] as Timestamp).toDate()
-          : null,
       rentPayments: (map['rentPayments'] as List<dynamic>?)
-              ?.map((payment) => RentPayment.fromMap(payment))
+              ?.map((payment) => Payment.fromMap(payment))
               .toList() ??
           [],
       isOccupied: map['isOccupied'] ?? false,
@@ -62,14 +49,8 @@ class Shop {
       'description': description,
       'tenant': tenant?.toMap(),
       'dateCreated': Timestamp.fromDate(dateCreated),
-      'contractEndDate':
-          contractEndDate != null ? Timestamp.fromDate(contractEndDate!) : null,
-      'contractLength': contractLength,
       'rentAmount': rentAmount,
       'leaseAmount': leaseAmount,
-      'leasePaymentDate': leasePaymentDate != null
-          ? Timestamp.fromDate(leasePaymentDate!)
-          : null,
       'rentPayments': rentPayments.map((payment) => payment.toMap()).toList(),
       'isOccupied': isOccupied,
     };
@@ -78,7 +59,7 @@ class Shop {
   bool get isShopOccupied => tenant != null;
 
   double getTotalRentPaid() {
-    return rentPayments.fold(0, (sum, payment) => sum + payment.amount);
+    return rentPayments.fold(0, (total, payment) => total + payment.amount);
   }
 
   bool isPaymentOverdue() {
@@ -90,45 +71,4 @@ class Shop {
         lastPaymentDate.year, lastPaymentDate.month + 1, lastPaymentDate.day);
     return nextPaymentDueDate.isBefore(DateTime.now());
   }
-}
-
-class RentPayment {
-  final String tenantId;
-  final DateTime date;
-  final double amount;
-  final PaymentType paymentType;
-  final int month;
-
-  RentPayment({
-    required this.tenantId,
-    required this.date,
-    required this.amount,
-    required this.paymentType,
-    required this.month,
-  });
-
-  factory RentPayment.fromMap(Map<String, dynamic> map) {
-    return RentPayment(
-      tenantId: map['tenantId'],
-      date: (map['date'] as Timestamp).toDate(),
-      amount: map['amount'].toDouble(),
-      paymentType: PaymentType.values.byName(map['paymentType']),
-      month: map['month'],
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'tenantId': tenantId,
-      'date': Timestamp.fromDate(date),
-      'amount': amount,
-      'paymentType': paymentType.name,
-      'month': month,
-    };
-  }
-}
-
-enum PaymentType {
-  rent,
-  lease,
 }

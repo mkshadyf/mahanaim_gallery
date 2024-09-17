@@ -11,18 +11,17 @@ import 'features/shops/views/shop_details_view.dart';
 import 'features/shops/views/add_shop_view.dart';
 import 'features/shops/views/tenant_details_view.dart';
 import 'features/shops/views/tenant_list_view.dart';
+import 'features/shops/views/rent_payments_list_view.dart';
 import 'settings/settings_controller.dart';
- import 'settings/settings_view.dart';
+import 'settings/settings_view.dart';
 import 'splash_screen.dart';
 
 class MyApp extends StatelessWidget {
-    final SettingsController settingsController;
+  final SettingsController settingsController;
 
-   const MyApp({super.key, required this.settingsController});
+  const MyApp({super.key, required this.settingsController});
 
-
- 
-   @override
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: settingsController,
@@ -41,7 +40,8 @@ class MyApp extends StatelessWidget {
           ],
           locale: settingsController.locale, // Apply the current locale
 
-          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
+          onGenerateTitle: (BuildContext context) =>
+              AppLocalizations.of(context)!.appTitle,
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
@@ -53,21 +53,26 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case '/splash':
                     return const SplashScreen();
-                 case '/':
-                    return MainNavigation(settingsController: settingsController);
+                  case '/':
+                    return MainNavigation(
+                        settingsController: settingsController);
 
                   case '/shop_details':
-                    return ShopDetailsView(shop: routeSettings.arguments as Shop);
+                    return ShopDetailsView(
+                        shop: routeSettings.arguments as Shop);
                   case '/add_shop':
                     return const AddShopView();
                   case '/tenant_list':
                     return const TenantListView();
                   case '/tenant_details':
-                    return TenantDetailsView(tenant: routeSettings.arguments as Tenant);
+                    return TenantDetailsView(
+                        tenant: routeSettings.arguments as Tenant);
                   case '/add_tenant':
                     return const AddTenantView();
-                  case '/add_rent_payment': // Add the new route
-                    return const AddRentPaymentView();  
+                  case '/add_rent_payment':
+                    return const AddRentPaymentView();
+                  case '/rent_payments_list':
+                    return const RentPaymentsView();
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   default:
@@ -81,4 +86,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
